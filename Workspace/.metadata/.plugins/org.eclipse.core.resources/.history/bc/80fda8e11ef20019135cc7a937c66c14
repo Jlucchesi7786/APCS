@@ -1,0 +1,17 @@
+
+public class Item {
+	String type;
+	int baseMod;
+	int itemMod;
+	String name;
+	
+	Item(String type, int itemMod) {
+		this.type = type;
+		this.itemMod = itemMod;
+		if (type.equals("longsword")) {
+			baseMod = 4;
+		} else if (type.equals("shortsword")) {
+			baseMod = 2;
+		}
+	}
+}

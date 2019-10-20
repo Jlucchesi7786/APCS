@@ -1,0 +1,186 @@
+/**
+ * @date 10/11
+ * @author Dr.Cheese
+ * This class stores a fraction as an object to avoid it being stored imprecisely.
+ */
+public class Fraction {
+	int num;
+	int den;
+	int wnumber;
+	
+	/**
+	 * The proper constructor.
+	 * @param num Numerator
+	 * @param den Denominator
+	 */
+	public Fraction(int num, int den) {
+		this.num = num;
+		this.den = den;
+	}
+	
+	/**
+	 * A variant constructor that I decided not to use.
+	 * @param wnumber Whole Number
+	 * @param num Numerator
+	 * @param den Denominator
+	 */
+	public Fraction(int wnumber, int num, int den) {
+		this.wnumber = wnumber;
+		this.num = num;
+		this.den = den;
+	}
+	
+	/**
+	 * Prints the fraction as a fraction. Example: a/b
+	 */
+	public String toString() {
+		String x = "";
+		x += " " + num + "/" + den + " ";
+		return x;
+	}
+	
+	/**
+	 * Adds two different Fractions together.
+	 * @param other Fraction object
+	 * @return Fraction object
+	 */
+	public Fraction add(Fraction other) {
+		int newN1 = this.num * other.getDenominator();
+		int newN2 = this.den * other.getNumerator();
+		int newN = newN1 + newN2;
+		int newD = this.den * other.getDenominator();
+		if (newN % newD == 0 && newN != 0) {
+			newN = newD = 1;
+		} else if (newN == 0) {
+			newD = 1;
+		}
+		Fraction o = new Fraction(newN, newD);
+		return o;
+	}
+	
+	/**
+	 * Subtracts another Fraction from the one receiving the message.
+	 * @param other Fraction object
+	 * @return Fraction object
+	 */
+	public Fraction subtract(Fraction other) {
+		int newN1 = this.num * other.getDenominator();
+		int newN2 = this.den * other.getNumerator();
+		int newN = newN1 - newN2;
+		int newD = this.den * other.getDenominator();
+		if (newN % newD == 0 && newN != 0) {
+			newN = newD = 1;
+		} else if (newN == 0) {
+			newD = 1;
+		}
+		Fraction o = new Fraction(newN, newD);
+		return o;	
+	}
+	
+	/**
+	 * Multiplies two Fractions objects.
+	 * @param other Fraction object
+	 * @return Fraction object
+	 */
+	public Fraction multiply(Fraction other) {
+		int newN = this.num * other.getNumerator();
+		int newD = this.den * other.getDenominator();
+		if (newN % newD == 0 && newN != 0) {
+			newN = newD = 1;
+		} else if (newN == 0) {
+			newD = 1;
+		}
+		Fraction o = new Fraction(newN, newD);
+		return o;
+	}
+	
+	/**
+	 * Divides this fraction from another one by multiplying by the reciprocal.
+	 * @param other Fraction object
+	 * @return Fraction object
+	 */
+	public Fraction divide(Fraction other) {
+		int newN = this.num * other.getDenominator();
+		int newD = this.den * other.getNumerator();
+		if (newN % newD == 0 && newN != 0) {
+			newN = newD = 1;
+		} else if (newN == 0) {
+			newD = 1;
+		}
+		Fraction o = new Fraction(newN, newD);
+		return o;
+	}
+	
+	/**
+	 * Checks if this Fraction is equal to another, including different multiples of a Fraction.
+	 * @param other Fraction object
+	 * @return boolean
+	 */
+	public boolean equals(Fraction other) {
+		int N = this.num % other.getNumerator();
+		int D = this.den % other.getDenominator();
+		if (N == 0) {
+			if (D == 0) {
+				return true;
+			}
+		}
+		N = other.getNumerator() % this.num;
+		D = other.getDenominator() % this.den;
+		if (N == 0) {
+			if (D == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param other Fraction
+	 * @return result
+	 */
+	public Fraction exp(Fraction other) {
+		int N = num;
+		for (int i = 1; i < other.getNumerator(); i++) {
+			N *= num;
+		}
+		int D = den;
+		for (int i = 1; i < other.getDenominator(); i++) {
+			D *= den;
+		}
+		Fraction f = new Fraction(N, D);
+		return f;
+	}
+
+	/**
+	 * Gets the value of the numerator.
+	 * @return int Numerator
+	 */
+	public int getNumerator() {
+		return num;
+	}
+
+	/**
+	 * Sets the value of the numerator equal to what the coder would like to change it to.
+	 * @param num int
+	 */
+	public void setNumerator(int num) {
+		this.num = num;
+	}
+
+	/**
+	 * Gets the value of the denominator.
+	 * @return int Denominator
+	 */
+	public int getDenominator() {
+		return den;
+	}
+
+	/**
+	 * Sets the value of the denominator equal to what the coder would like to change it to.
+	 * @param den int
+	 */
+	public void setDenominator(int den) {
+		this.den = den;
+	}
+}

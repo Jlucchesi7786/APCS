@@ -1,0 +1,15 @@
+
+public class Enemy {
+	int x;
+	int y;
+	int str;
+	int strmod;
+	int def;
+	int defmod;
+	String drop;
+	String name;
+	
+	Enemy(String name) {
+		this.name = name;
+	}
+}

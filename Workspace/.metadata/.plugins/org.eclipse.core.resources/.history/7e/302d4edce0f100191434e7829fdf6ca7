@@ -1,0 +1,12 @@
+
+public class Player {
+	public int x;
+	public int y;
+	public int str;
+	public int def;
+	public String name;
+	
+	Player() {
+		
+	}
+}

@@ -1,0 +1,27 @@
+
+public class Player {
+	public int x;
+	public int y;
+	public int str;
+	public int def;
+	public int HP;
+	public String name;
+	
+	Player() {
+		x = 5;
+		y = 5;
+		HP = 7;
+	}
+	
+	public void move(String direction) {
+		if (direction.equals("up")) {
+			y--;
+		} else if (direction.equals("right")) {
+			x++;
+		} else if (direction.equals("down")) {
+			y++;
+		} else if (direction.equals("left")) {
+			x--;
+		}
+	}
+}
