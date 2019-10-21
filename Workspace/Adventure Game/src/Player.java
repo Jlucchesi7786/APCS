@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 
 public class Player {
 	public int x;
 	public int y;
+	
 	public int str;
 	int strmod;
 	public int def;
@@ -9,12 +11,18 @@ public class Player {
 	public int spd;
 	public int HP;
 	public String name;
+	
+	public Item[] inventory = {new Item("Shortsword", 0)};
+	public Item weapon;
+	public Item gear;
+	public boolean gearset;
 
 	public boolean moved = false;
 
 	Player(String race) {
 		x = 30;
 		y = 1;
+		
 		if (race.equals("goblin")) {
 			HP = 3;
 			str = 2;
@@ -31,6 +39,69 @@ public class Player {
 			def = 1;
 			spd = 1;
 		}
+		
+		weapon = inventory[0];
+	}
+	
+	public void get(Item a) {
+		ArrayList<Item> b = new ArrayList<Item>();
+		for (int i = 0; i < inventory.length; i++) {
+			b.add(inventory[i]);
+		}
+		b.add(a);
+		inventory = new Item[b.size()];
+		b.toArray(inventory);
+	}
+	
+	public void setWeapon(Item a) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (a.name.equals(inventory[i].name)) {
+				weapon = inventory[i];
+			}
+		}
+	}
+	
+	public void setWeaponByType(String s) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (s.equals(inventory[i].type)) {
+				weapon = inventory[i];
+			}
+		}
+	}
+	
+	public void setWeaponByName(String s) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (s.equals(inventory[i].name)) {
+				weapon = inventory[i];
+			}
+		}
+	}
+	
+	public void setGear(Item a) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (a.name.equals(inventory[i].name)) {
+				weapon = inventory[i];
+			}
+		}
+		gearset = true;
+	}
+	
+	public void setGearByName(String s) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (s.equals(inventory[i].name)) {
+				weapon = inventory[i];
+			}
+		}
+		gearset = true;
+	}
+	
+	public void setGearByType(String s) {
+		for (int i = 0; i < inventory.length; i++) {
+			if (s.equals(inventory[i].type)) {
+				weapon = inventory[i];
+			}
+		}
+		gearset = true;
 	}
 
 	public void move(String direction, int spaces) {

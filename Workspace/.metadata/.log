@@ -1375,3 +1375,28 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.m2e.logback.appender 4 0 2019-10-20 21:26:53.306
 !MESSAGE Failed to open search index.
+!SESSION 2019-10-20 23:26:33.074 -----------------------------------------------
+eclipse.buildId=4.3.2.M20140221-1700
+java.version=1.8.0_221
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/jacksonlucchesi/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/jacksonlucchesi/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2019-10-20 23:26:37.422
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2019-10-20 23:32:18.682
+!MESSAGE Failed to open search index.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-10-20 23:32:19.313
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'org.eclipse.recommenders:index:pom:0.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-10-20 23:32:19.551
+!MESSAGE 'remote-models (http://download.eclipse.org/recommenders/models/kepler/, releases+snapshots)' did not send ETAG header for 'org.eclipse.recommenders:index:zip:0.0.0'.
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2019-10-20 23:32:19.554
+!MESSAGE Updating index cancelled.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2019-10-20 23:32:19.554
+!MESSAGE Failed to open search index.

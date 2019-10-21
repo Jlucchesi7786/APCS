@@ -4,7 +4,7 @@ public class Runner {
 	static Room frame = new Room(30, 30, "down");
 	static Chest[] Chests = frame.Chests;
 	static Scanner reader = new Scanner(System.in);
-	static Player you;
+	static public Player you;
 
 	static String name = "";
 	static int turn;
@@ -14,7 +14,11 @@ public class Runner {
 	static boolean EnemyTurn = false;
 	static boolean startup = false;
 	static boolean running = false;
-
+	
+	static boolean checkInvent = false;
+	static boolean inventHelp = true;
+	static boolean canEquip = false;
+	
 	public static void main(String[] args) {
 		if (startup == true) {
 			print("Welcome to Jackson's Adventure Game! What would you like the character's name to be?");
@@ -69,6 +73,56 @@ public class Runner {
 					print("What would you like to do now?");
 					action = reader.nextLine();
 				}
+				
+				if (action.equals("check inventory") || action.equals("inventory")) {
+					inventory();
+					checkInvent = true;
+					canEquip = true;
+				} else if (action.equals("check weapon") || action.equals("weapon")) {
+					print("you currently have a " + you.weapon.name + " equipped as your weapon.");
+					checkInvent = true;
+				} else if (action.equals("check gear") || action.equals("gear")) {
+					if (you.gearset) {
+						print("you currently have a " + you.gear.name + " equipped in your gear slot.");
+					} else {
+						print("you currently have no gear equipped.");
+					}
+					checkInvent = true;
+				}
+				
+				while (checkInvent) {
+					if (canEquip & inventHelp) {
+						print("What would you like to do now? (you can equip other items in this menu. Enter equip to do so)");
+						inventHelp = false;
+					} else {
+						print("What would you like to do now?");
+					}
+					action = reader.nextLine();
+					if (canEquip) {
+						if (action.equals("equip")) {
+							print("Would you like to equip a weapon or a gear item?");
+							action = reader.nextLine();
+							
+							if (action.equals("weapon")) {
+								print("Enter the name of the weapon you'd like to equip, including any bonus or Regular if there are none.");
+								action = reader.nextLine();
+								you.setWeaponByName(action);
+								print("You equipped a " + you.weapon.name);
+							} else if (action.equals("gear")) {
+								print("Enter the name of the gear you'd like to equip, including any bonus or Regular if there are none.");
+								action = reader.nextLine();
+								you.setGearByName(action);
+								print("You equipped a " + you.gear.name);
+							}
+
+							print("What would you like to do now?");
+							action = reader.nextLine();
+							checkInvent = false;
+						}
+					} else {
+						checkInvent = false;
+					}
+				}
 
 				if (action.equals("move")) {
 					move();
@@ -76,8 +130,6 @@ public class Runner {
 					print(name + " waited");
 				} else if (action.equals("open")) {
 					open();
-				} else {
-					print("action = " + action);
 				}
 				line();
 
@@ -105,9 +157,18 @@ public class Runner {
 	static void help() {
 		print("The list of commands is as follows: \n - move (lets your character move a space in one direction that you specify) \n - attack (makes your character attack one of the tiles next to him/her) \n - open (opens a chest that is next to your character) \n - stats (lets you see your character's stats) \n - wait (skips straight to the enemies' turn) \n Make sure you give all your commands in lowercase!");
 	}
+	
+	static void inventory() {
+		String s = "In your inventory, you have:";
+		for (int i = 0; i < you.inventory.length; i++) {
+			s += "\n - a " + you.inventory[i].name;
+		}
+		print(s);
+	}
 
 	static void open() {
-		for (int i = 0; i < Chests.length ; i++) {if ((Chests[i].x - you.x == -1) && (Chests[i].y == you.y)) {
+		for (int i = 0; i < Chests.length ; i++) {
+			if ((Chests[i].x - you.x == -1) && (Chests[i].y == you.y)) {
 				Chests[i].open();
 			} else if ((Chests[i].x - you.x == 1) && (Chests[i].y == you.y)) {
 				Chests[i].open();
@@ -115,6 +176,12 @@ public class Runner {
 				Chests[i].open();
 			} else if ((Chests[i].y - you.y == 1) && (Chests[i].x == you.x)) {
 				Chests[i].open();
+			}
+			
+			if (Chests[i].open) {
+				you.get(Chests[i].contents);
+				print("you got a " + Chests[i].contents.name + "!");
+				line();
 			}
 		}
 	}
