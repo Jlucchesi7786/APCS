@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 public class Runner {
 	static Room frame = new Room(30, 30, "down");
+	static Chest[] Chests = frame.Chests;
 	static Scanner reader = new Scanner(System.in);
 	static Player you;
 
@@ -25,9 +26,9 @@ public class Runner {
 				print("That is not an answer. What race would you like to be?");
 				race = reader.nextLine();
 				you = new Player(race);
-				
+
 			}
-			
+
 			line();
 			print("Welcome, " + name + ". In this game, you are an adventurer who has delved into a dungeon. In this view, \"#\"s represent \nthe walls, \"+\"s are locked doors, \"-\"s and |s are open doors, \"H\"s are chests, and \"X\"s are monsters. You \nare the \"@\" symbol.");
 			stats();
@@ -58,13 +59,12 @@ public class Runner {
 					action = reader.nextLine();
 				}
 
-				if (action.equals("help")) {
-					help();
-					line();
-					print("What would you like to do now?");
-					action = reader.nextLine();
-				} else if (action.equals("stats")) {
-					stats();
+				while (action.equals("help") || action.equals("stats")) {
+					if (action.equals("help")) {
+						help();
+					} else if (action.equals("stats")) {
+						stats();
+					}
 					line();
 					print("What would you like to do now?");
 					action = reader.nextLine();
@@ -74,6 +74,10 @@ public class Runner {
 					move();
 				} else if (action.equals("wait")) {
 					print(name + " waited");
+				} else if (action.equals("open")) {
+					open();
+				} else {
+					print("action = " + action);
 				}
 				line();
 
@@ -100,6 +104,19 @@ public class Runner {
 
 	static void help() {
 		print("The list of commands is as follows: \n - move (lets your character move a space in one direction that you specify) \n - attack (makes your character attack one of the tiles next to him/her) \n - open (opens a chest that is next to your character) \n - stats (lets you see your character's stats) \n - wait (skips straight to the enemies' turn) \n Make sure you give all your commands in lowercase!");
+	}
+
+	static void open() {
+		for (int i = 0; i < Chests.length ; i++) {if ((Chests[i].x - you.x == -1) && (Chests[i].y == you.y)) {
+				Chests[i].open();
+			} else if ((Chests[i].x - you.x == 1) && (Chests[i].y == you.y)) {
+				Chests[i].open();
+			} else if ((Chests[i].y - you.y == -1) && (Chests[i].x == you.x)) {
+				Chests[i].open();
+			} else if ((Chests[i].y - you.y == 1) && (Chests[i].x == you.x)) {
+				Chests[i].open();
+			}
+		}
 	}
 
 	static void move() {
@@ -159,7 +176,7 @@ public class Runner {
 
 				you.move(action, spaces);
 			}
-			
+
 			if (spaces != 1) {
 				print(name + " moved " + action + " " + spaces + " spaces");
 			} else {

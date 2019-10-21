@@ -4,16 +4,17 @@ public class Room {
 	int height;
 	int playerX;
 	int playerY;
-	
+
 	boolean checked = false;
-	Chest[] Chests = {new Chest(1, 30), new Chest(1, 18)};
+	boolean opened = false;
+	Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
 
 	String orientation;
 
 	Room(int width, int height, String orientation) {
 		this.width = width + 2;
 		this.height = height + 2;
-		this.orientation = orientation;	
+		this.orientation = orientation;
 		System.out.println("length: " + Chests.length);
 	}
 
@@ -42,9 +43,14 @@ public class Room {
 						} else {
 							s += "# ";
 						}
-					} else  {			
+					} else  {
 						if (chestCheck(x, y)) {
-							s += "H ";
+							if (opened) {
+								s += "O ";
+								opened = false;
+							} else {
+								s += "H ";
+							}
 						} else {
 							s += "  ";
 						}
@@ -62,22 +68,13 @@ public class Room {
 		this.playerX = playerX;
 		this.playerY = playerY;
 	}
-	
+
 	boolean chestCheck(int x, int y) {
 		for (int i = 0; i < Chests.length; i++) {
-			/*if (y == Chests[1].y) {
-				System.out.println("yee");
-			}
-			if (x == Chests[1].x) {
-				System.out.println("yoo");
-			}if (x == Chests[1].x && y == Chests[1].y) {
-				System.out.println("yoo");
-			}
-			if (i == 1) {
-				System.out.println(x + " == " + Chests[0].x);
-				System.out.println(y + " == " + Chests[0].y);
-			}*/
 			if (x == Chests[i].x && y == Chests[i].y) {
+				if (Chests[i].status()) {
+					opened = true;
+				}
 				return true;
 			}
 		}

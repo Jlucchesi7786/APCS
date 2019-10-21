@@ -9,12 +9,12 @@ public class Player {
 	public int spd;
 	public int HP;
 	public String name;
-	
+
 	public boolean moved = false;
-	
+
 	Player(String race) {
-		x = 2;
-		y = 30;
+		x = 30;
+		y = 1;
 		if (race.equals("goblin")) {
 			HP = 3;
 			str = 2;
@@ -32,7 +32,7 @@ public class Player {
 			spd = 1;
 		}
 	}
-	
+
 	public void move(String direction, int spaces) {
 		moved = false;
 		if (direction.equals("up")) {
@@ -43,7 +43,7 @@ public class Player {
 			} else {
 				y = newY;
 				moved = true;
-			}	
+			}
 		} else if (direction.equals("right")) {
 			int newX = x + spaces;
 			System.out.println(newX);
@@ -74,7 +74,7 @@ public class Player {
 			}
 		}
 	}
-	
+
 	public String toString() {
 		return ("Your stats: \n  Strength: " + str + "\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd);
 	}
