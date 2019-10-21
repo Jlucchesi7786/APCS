@@ -34,8 +34,13 @@ public class Runner {
 			}
 
 			line();
-			print("Welcome, " + name + ". In this game, you are an adventurer who has delved into a dungeon. In this view, \"#\"s represent \nthe walls, \"+\"s are locked doors, \"-\"s and |s are open doors, \"H\"s are chests, and \"X\"s are monsters. You \nare the \"@\" symbol.");
+			//print(opening());
+			opening();
 			stats();
+			
+			do {
+				print("Are you ready to proceed?");
+			} while (!reader.nextLine().equals("yes"));
 
 			startup = false;
 			running = true;
@@ -49,7 +54,7 @@ public class Runner {
 		do {
 			frame.update(you.x, you.y);
 			System.out.println(frame);
-			print("x: " + you.x + "\ny: " + you.y);
+			//print("x: " + you.x + "\ny: " + you.y);
 
 			if (PlayerTurn) {
 				if (turn == 0) {
@@ -63,9 +68,11 @@ public class Runner {
 					action = reader.nextLine();
 				}
 
-				while (action.equals("help") || action.equals("stats")) {
+				while (action.equals("help") || action.equals("stats") || action.equals("help2")) {
 					if (action.equals("help")) {
 						help();
+					} else if (action.equals("help2")) {
+						opening();
 					} else if (action.equals("stats")) {
 						stats();
 					}
@@ -100,6 +107,7 @@ public class Runner {
 					action = reader.nextLine();
 					if (canEquip) {
 						if (action.equals("equip")) {
+							boolean equipping = true;
 							print("Would you like to equip a weapon or a gear item?");
 							action = reader.nextLine();
 							
@@ -107,18 +115,21 @@ public class Runner {
 								print("Enter the name of the weapon you'd like to equip, including any bonus or Regular if there are none.");
 								action = reader.nextLine();
 								you.setWeaponByName(action);
+								equipping = false;
 								print("You equipped a " + you.weapon.name);
 							} else if (action.equals("gear")) {
+								equipping = false;		
 								print("Enter the name of the gear you'd like to equip, including any bonus or Regular if there are none.");
 								action = reader.nextLine();
 								you.setGearByName(action);
 								print("You equipped a " + you.gear.name);
 							}
-
-							print("What would you like to do now?");
-							action = reader.nextLine();
-							checkInvent = false;
+							if (!equipping) {
+								print("What would you like to do now?");
+								action = reader.nextLine();
+							}
 						}
+						checkInvent = false;
 					} else {
 						checkInvent = false;
 					}
@@ -155,7 +166,35 @@ public class Runner {
 	}
 
 	static void help() {
-		print("The list of commands is as follows: \n - move (lets your character move a space in one direction that you specify) \n - attack (makes your character attack one of the tiles next to him/her) \n - open (opens a chest that is next to your character) \n - stats (lets you see your character's stats) \n - wait (skips straight to the enemies' turn) \n Make sure you give all your commands in lowercase!");
+		String s = "";
+		s += "The list of commands is as follows: \n";
+		s += " - \'command\' (description) \n";
+		s += " - \'move\' (lets your character move a space in one direction that you specify) \n";
+		s += " - \'attack\' (makes your character attack one of the tiles next to him/her) \n";
+		s += " - \'open\' (opens a chest that is next to your character) \n";
+		s += " - \'stats\' (lets you see your character's stats) \n";
+		s += " - \'wait\' (skips straight to the enemies' turn) \n";
+		s += " - \'inventory\' or \'check invetory\' (lets you check your inventory and equip items) \n";
+		s += " - \'weapon\' or \'check weapon\' (lets you check what your currently equipped weapon is) \n";
+		s += " - \'gear\' or \'gear\' (lets you check what your currently equipped gear is) \n";
+		s += "Make sure you give all your commands in lowercase! Enter help2 to see a list of all of the symbols and \n";
+		s += "what they mean.";
+		print(s);
+	}
+	
+	public static void opening() {
+		String s = "";
+		s += "Welcome, " + name + ". In this game, you are an adventurer who has delved into a dungeon. The symbols in this";
+		s += " game \nrepresent a number of things. Here's a list: \n";
+		s += " - the \"#\"s represent the walls of the dungeon. \n";
+		s += " - the \"|\" and \"-\" represent unlocked doors, while a \"+\" represents a locked door. \n";
+		s += " - the \"@\" symbol is your character. \n";
+		s += " - any \"X\" symbols represent monsters that roam the dungeon. \n";
+		s += " - the \"H\" character represents a closed chest, while the \"O\" character represents an open chest. \n";
+		if (startup) {
+			s += "You can enter help2 at any time to see this message again.";
+		}
+		print(s);
 	}
 	
 	static void inventory() {
