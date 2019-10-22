@@ -2,6 +2,8 @@
 public class Room {
 	int width;
 	int height;
+	int playerX;
+	int playerY;
 	
 	Player player = new Player();
 
@@ -61,6 +63,11 @@ public class Room {
 		}
 
 		return s;
+	}
+
+	public void update(int playerX, int playerY) {
+		this.playerX = playerX;
+		this.playerY = playerY;
 	}
 	
 	public void update(Player player) {

@@ -1,0 +1,29 @@
+/**
+ * This class holds some basic information about the chests lying around the dungeon.
+ * @author Dr. Cheese
+ */
+public class Chest {
+	public int x;
+	public int y;
+	boolean open;
+	Item contents;
+
+	/**
+	 * This constructor makes a new chest at an (x, y) coordinate set upon declaration.
+	 * @param x int
+	 * @param y int
+	 */
+	Chest(int x, int y) {
+		this.x = x;
+		this.y = y;
+		open = false;
+		contents = new Item();
+	}
+	
+	/**
+	 * This method changes the state of the chest from closed to open.
+	 */
+	public void open() {
+		open = true;
+	}
+}

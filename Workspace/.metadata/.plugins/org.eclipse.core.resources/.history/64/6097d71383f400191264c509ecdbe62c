@@ -42,6 +42,7 @@ public class Player {
 			def = 1;
 			spd = 1;
 		}
+		System.out.println(dmg);
 
 		equip(inventory[0]);
 	}

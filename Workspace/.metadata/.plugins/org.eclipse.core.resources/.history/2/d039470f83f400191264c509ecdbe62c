@@ -42,6 +42,7 @@ public class Player {
 			def = 1;
 			spd = 1;
 		}
+		System.out.println(dmg);
 
 		equip(inventory[0]);
 	}
@@ -147,6 +148,7 @@ public class Player {
 		moved = false;
 		if (direction.equals("up")) {
 			int newY = y - spaces;
+			System.out.println(newY);
 			if (newY <= 0) {
 				System.out.println("Your character can't move through walls.");
 			} else {
@@ -155,6 +157,7 @@ public class Player {
 			}
 		} else if (direction.equals("right")) {
 			int newX = x + spaces;
+			System.out.println(newX);
 			if ((newX >= 31) || (newX == 6 && y != 2 && y != 10 && y != 15 && y != 23) || (newX == 25 && y != 10 && y != 17 && y != 29)) {
 				System.out.println("Your character can't move through walls.");
 			} else {
@@ -163,6 +166,7 @@ public class Player {
 			}
 		} else if (direction.equals("down")) {
 			int newY = y + spaces;
+			System.out.println(newY);
 			if (newY >= 31) {
 				System.out.println("Your character can't move through walls.");
 				newY = y;
@@ -172,6 +176,7 @@ public class Player {
 			}
 		} else if (direction.equals("left")) {
 			int newX = x - spaces;
+			System.out.println(newX);
 			if (newX <= 0) {
 				System.out.println("Your character can't move through walls.");
 			} else {
