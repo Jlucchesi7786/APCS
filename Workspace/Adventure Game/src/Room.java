@@ -4,6 +4,8 @@ public class Room {
 	int height;
 	int playerX;
 	int playerY;
+	
+	Player player = new Player();
 
 	boolean checked = false;
 	boolean opened = false;
@@ -15,14 +17,13 @@ public class Room {
 		this.width = width + 2;
 		this.height = height + 2;
 		this.orientation = orientation;
-		System.out.println("length: " + Chests.length);
 	}
 
 	public String toString() {
 		String s = "";
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (y == playerY && x == playerX) {
+				if (y == player.y && x == player.x) {
 					s += "@ ";
 				} else if (y == 0 || y == height-1 || (y == 14 && x > 6)  || (y == 18 && x > 25) || (y == 18 && x < 6) || (y == 25 && x > 25) || (y == 29 && x < 6)) {
 					if ((x == (width/2)-1 && y == height-1) || (x == 27 && y == 25) || (x == 5 && y == 29)) {
@@ -33,7 +34,7 @@ public class Room {
 				} else if ((y == 4) && (x<6)) {
 					s += "# ";
 				} else {
-					if (y == playerY && x == playerX) {
+					if (y == player.y && x == player.x) {
 						s += "@ ";
 					}/* else if (x == Chests[0].x && y == Chests[0].y) {
 						s += "H ";
@@ -68,11 +69,15 @@ public class Room {
 		this.playerX = playerX;
 		this.playerY = playerY;
 	}
+	
+	public void update(Player player) {
+		this.player = player;
+	}
 
 	boolean chestCheck(int x, int y) {
 		for (int i = 0; i < Chests.length; i++) {
 			if (x == Chests[i].x && y == Chests[i].y) {
-				if (Chests[i].status()) {
+				if (Chests[i].open) {
 					opened = true;
 				}
 				return true;

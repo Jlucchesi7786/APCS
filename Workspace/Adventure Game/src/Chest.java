@@ -15,8 +15,4 @@ public class Chest {
 	public void open() {
 		open = true;
 	}
-	
-	public boolean status() {
-		return open;
-	}
 }

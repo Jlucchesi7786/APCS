@@ -1,0 +1,26 @@
+
+public class Enemy {
+	int x;
+	int y;
+	int str;
+	int def;
+	String drop;
+	String name;
+	
+	int playerX;
+	int playerY;
+	boolean pursuing = false;
+	
+	Enemy(String name, int level) {
+		this.name = name;
+		str = (int)(Math.ceil(Math.random()*level));
+		def = (int)(Math.ceil(Math.random()*level));
+		x = (int)(Math.ceil(Math.random()*30));
+		y = (int)(Math.ceil(Math.random()*30));
+	}
+	
+	Enemy(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+}

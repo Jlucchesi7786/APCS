@@ -3,18 +3,21 @@ import java.util.ArrayList;
 public class Player {
 	public int x;
 	public int y;
-	
+
 	public int str;
-	int strmod;
+	int strmod = 0;
+	public int dmg = 2;
 	public int def;
-	int defmod;
+	int defmod = 0;
+	public int dmgred = 2;
 	public int spd;
 	public int HP;
 	public String name;
-	
+
 	public Item[] inventory = {new Item("Shortsword", 0)};
 	public Item weapon;
 	public Item gear;
+	boolean firstWeapon = true;
 	public boolean gearset;
 
 	public boolean moved = false;
@@ -22,7 +25,7 @@ public class Player {
 	Player(String race) {
 		x = 30;
 		y = 1;
-		
+
 		if (race.equals("goblin")) {
 			HP = 3;
 			str = 2;
@@ -39,10 +42,16 @@ public class Player {
 			def = 1;
 			spd = 1;
 		}
-		
-		weapon = inventory[0];
+		System.out.println(dmg);
+
+		equip(inventory[0]);
 	}
 	
+	Player() {
+		x = 30;
+		y = 1;
+	}
+
 	public void get(Item a) {
 		ArrayList<Item> b = new ArrayList<Item>();
 		for (int i = 0; i < inventory.length; i++) {
@@ -52,56 +61,87 @@ public class Player {
 		inventory = new Item[b.size()];
 		b.toArray(inventory);
 	}
-	
+
 	public void setWeapon(Item a) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (a.name.equals(inventory[i].name)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 	}
-	
+
 	public void setWeaponByType(String s) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (s.equals(inventory[i].type)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 	}
-	
+
 	public void setWeaponByName(String s) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (s.equals(inventory[i].name)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 	}
-	
+
 	public void setGear(Item a) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (a.name.equals(inventory[i].name)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 		gearset = true;
 	}
-	
+
 	public void setGearByName(String s) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (s.equals(inventory[i].name)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 		gearset = true;
 	}
-	
+
 	public void setGearByType(String s) {
 		for (int i = 0; i < inventory.length; i++) {
 			if (s.equals(inventory[i].type)) {
-				weapon = inventory[i];
+				equip(inventory[i]);
 			}
 		}
 		gearset = true;
+	}
+
+	void equip(Item a) {
+		if (a.weapon) {
+			if (firstWeapon) {
+				strmod = a.mod;
+				firstWeapon = false;
+			} else {
+				strmod -= weapon.mod;
+				strmod += a.mod;
+			}
+			weapon = a;
+			dmg = str + strmod;
+		} else if (a.gear) {
+			if (gearset) {
+				if (gear.dmgBoost) {
+					strmod -= gear.mod;
+				} else {
+					defmod -= gear.mod;
+				}
+			}
+
+			if (a.dmgBoost) {
+				strmod += a.mod;
+				dmg = str + strmod;
+			} else {
+				defmod += a.mod;
+				dmgred = def + defmod;
+			}
+			gear = a;
+		}
 	}
 
 	public void move(String direction, int spaces) {
@@ -147,6 +187,17 @@ public class Player {
 	}
 
 	public String toString() {
-		return ("Your stats: \n  Strength: " + str + "\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd);
+		String s = "";
+		if (gearset && !gear.dmgBoost) {
+			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
+					+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
+		} else if (gearset) {
+			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + " + " + gear.name
+					+")\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
+		} else {
+			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
+					+ def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
+		}
+		return s;
 	}
 }

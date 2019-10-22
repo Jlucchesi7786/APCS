@@ -9,6 +9,7 @@ public class Item {
 	public boolean weapon;
 	public boolean gear;
 	public boolean shield;
+	public boolean dmgBoost;
 
 	String[] types = {"Longsword", "Iron Shield", "Shortsword", "Amulet of Strength"};
 
@@ -43,11 +44,15 @@ public class Item {
 			weapon = true;
 			gear = false;
 			shield = false;
+			
+			dmgBoost = true;
 		} else if (type.equals("Shortsword")) {
 			baseMod = 2;
 			weapon = true;
 			gear = false;
 			shield = false;
+			
+			dmgBoost = true;
 		}
 
 		if (type.equals("Amulet of Strength")) {
@@ -55,11 +60,15 @@ public class Item {
 			weapon = false;
 			gear = true;
 			shield = false;
+			
+			dmgBoost = true;
 		} else if (type.equals("Iron Shield")) {
 			baseMod = 2;
 			weapon = false;
 			gear = true;
 			shield = true;
+			
+			dmgBoost = false;
 		}
 	}
 
