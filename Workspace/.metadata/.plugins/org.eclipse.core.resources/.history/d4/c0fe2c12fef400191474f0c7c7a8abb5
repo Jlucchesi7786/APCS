@@ -5,7 +5,7 @@
 public class Room {
 	int width;
 	int height;
-
+	
 	Player player = new Player();
 
 	boolean checked = false;
@@ -15,19 +15,19 @@ public class Room {
 	String orientation;
 
 	/**
-	 * This constructor makes a room with width and height. The playable area is a square/rectangle in the middle, with the walls taking up one space on each side
-	 * @param width int
-	 * @param height int
-	 * @param orientation String
+	 * 
+	 * @param width
+	 * @param height
+	 * @param orientation
 	 */
 	Room(int width, int height, String orientation) {
-		this.width = width;
-		this.height = height;
-		this.orientation = orientation; // orientation tells it where the entrance is
+		this.width = width + 2;
+		this.height = height + 2;
+		this.orientation = orientation;
 	}
 
 	/**
-	 * This toString() method constructs a string with all of the symbols and the empty space in the frame
+	 * This toString() method 
 	 */
 	public String toString() {
 		String s = "";
@@ -74,18 +74,18 @@ public class Room {
 	}
 
 	/**
-	 * This method takes in a Player object to update where the character is to display it properly.
-	 * @param player Player object
+	 * 
+	 * @param player
 	 */
 	public void update(Player player) {
 		this.player = player;
 	}
 
 	/**
-	 * This method checks if there is a chest on a given tile
-	 * @param x int
-	 * @param y int
-	 * @return boolean (if chest is there)
+	 * 
+	 * @param x
+	 * @param y
+	 * @return
 	 */
 	boolean chestCheck(int x, int y) {
 		for (int i = 0; i < Chests.length; i++) {

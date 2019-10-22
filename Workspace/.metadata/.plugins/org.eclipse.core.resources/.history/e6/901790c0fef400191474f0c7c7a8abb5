@@ -5,7 +5,7 @@ import java.util.Scanner;
  *
  */
 public class Runner {
-	static Room frame = new Room(32, 32, "down"); // Creates the room that the game works in
+	static Room frame = new Room(30, 30, "down"); // Creates the room that the game works in
 	static Chest[] Chests = frame.Chests; // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
@@ -17,7 +17,7 @@ public class Runner {
 
 	static boolean PlayerTurn = true; // keeps track of when it's the Player's turn
 	static boolean EnemyTurn = false; // keeps track of when it's the monster's turn
-	static boolean startup = true; // tells the program to display the startup messages, or just go to default settings
+	static boolean startup = false; // tells the program to display the startup messages, or just go to default settings
 	static boolean running = false; // tells the program when the game part is running. Program will not stop if true
 
 	static String action = ""; // used to keep track of what the player has entered for the character to do
@@ -187,7 +187,7 @@ public class Runner {
 		if (startup == true) { // if wanting to display the startup text
 			print("Welcome to Jackson's Adventure Game! What would you like the character's name to be?");
 			name = reader.nextLine(); // asks the player to name their character
-			print("What race would you like to be? Your choices are human or orc.");
+			print("What race would you like to be? Your choices are human, orc, or goblin.");
 			String race = reader.nextLine(); // asks the player what race he/she would like their character to be
 			you = new Player(race);
 			while (you.HP <= 0) { // checks if the race has been set yet, and if it hasn't it asks for another answer
