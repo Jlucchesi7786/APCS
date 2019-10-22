@@ -190,12 +190,12 @@ public class Runner {
 			print("What race would you like to be? Your choices are human or orc.");
 			String race = reader.nextLine(); // asks the player what race he/she would like their character to be
 			you = new Player(race);
-			while (you.HP <= 0) { // checks if the race has been set yet, and if it hasn't it asks for another answer
+			/*while (you.HP <= 0) { // checks if the race has been set yet, and if it hasn't it asks for another answer
 				print("That is not an answer. What race would you like to be?");
 				race = reader.nextLine();
 				you = new Player(race);
 
-			}
+			}*/
 
 			line();
 			opening(); // prints a message with all of the symbols of the dungeon and what they represent
