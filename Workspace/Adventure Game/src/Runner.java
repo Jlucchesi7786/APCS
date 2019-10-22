@@ -329,7 +329,7 @@ public class Runner {
 				if (spaces > you.spd) { // if the player wants to move faster than the character's speed, say no
 					print("you can't move faster than your speed will allow.");
 					line();
-				} else if (spaces == 0) { // if the player wants not move in this context, say no
+				} else if (spaces == 0) { // if the player wants to not move in this context, say no
 					print("you can't move 0 spaces.");
 					line();
 				} else if (spaces < 0) { // if the player wants to move negative spaces, say no
