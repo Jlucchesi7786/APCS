@@ -310,35 +310,64 @@ public class Runner {
 	 * This method lets the player move the character up to its speed in one direction
 	 */
 	static void move() {
-		String action;
 		do {
 			print("Which direction would you like to move? (up, down, left, or right)"); // asks the player to input a direction
-			action = reader.nextLine();
-		} while (!action.equals("up") && !action.equals("down") && !action.equals("left") && !action.equals("right")); // keeps asking for a direction until given one
+			String action = reader.nextLine();
+		} while (!action.equals("up") && !action.equals("down") && !action.equals("left") && !action.equals("righ"));
 
 		if (you.spd == 1) { // if the character's speed is 1, they don't get to choose how many spaces to move
-			you.move(action, 1); // makes the character move 1 space in the chosen direction
+			you.move(action, 1);
+			while (!you.moved) {
+				print("Which direction would you like to move?");
+				action = reader.nextLine();
+				you.move(action, 1);
+			}
 			print(name + " moved " + action);
 		} else {
-			int spaces;
+			int spaces = 0;
 
-			do { // if the character can move more than 1 space per turn, gives the player the option
+			do {
 				print("How many spaces would you like to move?");
 				spaces = reader.nextInt();
 
-				if (spaces > you.spd) { // if the player wants to move faster than the character's speed, say no
+				if (spaces > you.spd) {
 					print("you can't move faster than your speed will allow.");
 					line();
-				} else if (spaces == 0) { // if the player wants not move in this context, say no
+				} else if (spaces == 0) {
 					print("you can't move 0 spaces.");
 					line();
-				} else if (spaces < 0) { // if the player wants to move negative spaces, say no
+				} else if (spaces < 0) {
 					print("you can't move negative spaces.");
 					line();
 				}
 			} while ((spaces < 0) || (spaces == 0) || (spaces>you.spd));
 
-			you.move(action, spaces); // once a direction and number of spaces have been selected, makes the character move
+			you.move(action, spaces);
+			while (!you.moved) {
+				action = "";
+				print("Which direction would you like to move?");
+				action = reader.nextLine();
+				if (action.equals("")) {
+					action = reader.nextLine();
+				}
+				do {
+					print("How many spaces would you like to move?");
+					spaces = reader.nextInt();
+
+					if (spaces > you.spd) {
+						print("you can't move faster than your speed will allow.");
+						line();
+					} else if (spaces == 0) {
+						print("you can't move 0 spaces.");
+						line();
+					} else if (spaces < 0) {
+						print("you can't move negative spaces.");
+						line();
+					}
+				} while ((spaces < 0) || (spaces == 0) || (spaces>you.spd));
+
+				you.move(action, spaces);
+			}
 
 			if (spaces != 1) {
 				print(name + " moved " + action + " " + spaces + " spaces");
@@ -349,15 +378,15 @@ public class Runner {
 	}
 
 	/**
-	 * This method is used to do a full line break without having to type out the System.out.println() command every time.
+	 *
 	 */
 	static void line() {
 		System.out.println();
 	}
 
 	/**
-	 * This method fulfills the same function as the System.out.println(String s) method, but without having to type out most of the method call
-	 * @param s String
+	 *
+	 * @param s
 	 */
 	static void print(String s) {
 		System.out.println(s);
