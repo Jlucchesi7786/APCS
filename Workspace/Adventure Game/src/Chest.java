@@ -1,8 +1,6 @@
 /**
  * This class holds some basic information about the chests lying around the dungeon.
  * @author Dr. Cheese
- * 
- * 
  */
 public class Chest {
 	public int x; // the x coordinate where the chest is
@@ -21,7 +19,7 @@ public class Chest {
 		open = false; // sets the state of the chest to not open, or closed
 		contents = new Item(); // generates a random item to be inside the chest
 	}
-	
+
 	/**
 	 * This method changes the state of the chest from closed to open.
 	 */

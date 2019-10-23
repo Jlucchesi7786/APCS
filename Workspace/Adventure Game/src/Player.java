@@ -34,157 +34,158 @@ public class Player {
 	public boolean gearset; // tells if the character has set a gear item or not
 
 	/**
-	 * This constructor sets up the player with a character at some x and y decided by the author and a race set by the player
+	 * This constructor sets up the player with a character at some x and y decided by the author and a race set by the player.
 	 * @param race String
 	 */
 	Player(String race) {
-		x = 30;
-		y = 1;
+		x = 30; // sets the beginning x
+		y = 1; // sets the beginning y
 
-		legalRaceCheck(race);
-		raceSet();
+		legalRaceCheck(race); // checks if the race the player wants to be is defined
+		raceSet(); // once the race is considered legal, the constructor sets up the base stats
 
-		equip(inventory[0]);
+		equip(inventory[0]); // equips the starting weapon
 	}
 
 	/**
-	 * This constructor sets up the player at an x and y position without initializing their inventory
+	 * This constructor sets up the player at an x and y position without initializing their inventory.
 	 */
 	Player() {
-		x = 30;
-		y = 1;
+		x = 30; // sets the beginning x
+		y = 1; // sets the beginning y
 	}
 
 	/**
-	 * This method lets the character add an item to their inventory
+	 * This method lets the character add an item to their inventory.
 	 * @param a Item object
 	 */
 	public void get(Item a) {
-		ArrayList<Item> b = new ArrayList<Item>();
+		ArrayList<Item> b = new ArrayList<Item>(); // makes an ArrayList
 		for (int i = 0; i < inventory.length; i++) {
-			b.add(inventory[i]);
+			b.add(inventory[i]); // adds the entire inventory to the created ArrayList
 		}
-		b.add(a);
-		inventory = new Item[b.size()];
-		b.toArray(inventory);
+		b.add(a); // adds the new item to the ArrayList
+		inventory = new Item[b.size()]; // redefines the inventory[] array based on the size of the ArrayList
+		b.toArray(inventory); // puts all of the values of the ArrayList into the new inventory[] array
 	}
 
 	/**
-	 *
+	 * This method sets the character's equipped weapon using a passed item object.
+	 * @param weapon Item object
+	 */
+	public void setWeapon(Item weapon) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (weapon.name.equals(inventory[i].name)) { // checks for a matching name in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method sets the character's equipped weapon using the type of the weapon.
+	 * @param type String
+	 */
+	public void setWeaponByType(String type) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (type.equals(inventory[i].type)) { // checks for a matching type in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method sets the character's equipped weapon using the type of the weapon.
+	 * @param name String
+	 */
+	public void setWeaponByName(String name) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (name.equals(inventory[i].name)) { // checks for a matching name in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method sets the character's equipped gear using a passed item object.
+	 * @param gear Item object
+	 */
+	public void setGear(Item gear) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (gear.name.equals(inventory[i].name)) { // checks for a matching name in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method sets the character's equipped gear using the name of the gear.
+	 * @param name String
+	 */
+	public void setGearByName(String type) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (name.equals(inventory[i].name)) { // checks for a matching name in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method sets the character's equipped gear using the type of the gear.
+	 * @param type String
+	 */
+	public void setGearByType(String type) {
+		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
+			if (type.equals(inventory[i].type)) { // checks for a matching type in the inventory
+				equip(inventory[i]); // equips it if there is
+			}
+		}
+	}
+
+	/**
+	 * This method uses some logic to determine what type of item is trying to be equipped, then changes the mod and the equip slot.
 	 * @param a Item object
 	 */
-	public void setWeapon(Item a) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (a.name.equals(inventory[i].name)) {
-				equip(inventory[i]);
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param s
-	 */
-	public void setWeaponByType(String s) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (s.equals(inventory[i].type)) {
-				equip(inventory[i]);
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param s
-	 */
-	public void setWeaponByName(String s) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (s.equals(inventory[i].name)) {
-				equip(inventory[i]);
-			}
-		}
-	}
-
-	/**
-	 *
-	 * @param a
-	 */
-	public void setGear(Item a) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (a.name.equals(inventory[i].name)) {
-				equip(inventory[i]);
-			}
-		}
-		gearset = true;
-	}
-
-	/**
-	 *
-	 * @param s
-	 */
-	public void setGearByName(String s) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (s.equals(inventory[i].name)) {
-				equip(inventory[i]);
-			}
-		}
-		gearset = true;
-	}
-
-	/**
-	 *
-	 * @param s
-	 */
-	public void setGearByType(String s) {
-		for (int i = 0; i < inventory.length; i++) {
-			if (s.equals(inventory[i].type)) {
-				equip(inventory[i]);
-			}
-		}
-		gearset = true;
-	}
-
-	/**
-	 *
-	 * @param a
-	 */
 	void equip(Item a) {
-		if (a.weapon) {
-			if (firstWeapon) {
-				strmod = a.mod;
-				firstWeapon = false;
+		if (a.weapon) { // if the Item is a weapon
+			if (firstWeapon) { // if it is the starting weapon
+				strmod = a.mod; // sets the damage bonus = to the starting weapon's damage bonus
+				firstWeapon = false; // sets the boolean = false so this can only be run once
 			} else {
-				strmod -= weapon.mod;
-				strmod += a.mod;
+				strmod -= weapon.mod; // if it's not the first weapon equipped, you gotta subtract the mod of the original weapon
+				strmod += a.mod; // and then add the mod of the new weapon
 			}
-			weapon = a;
-			dmg = str + strmod;
+			weapon = a; // stores what the new weapon is
+			dmg = str + strmod; // redefines damage
 		} else if (a.gear) {
-			if (gearset) {
-				if (gear.dmgBoost) {
-					strmod -= gear.mod;
+			if (gearset) { // if a gear item has already been set, change the modifiers accordingly
+				if (gear.dmgBoost) { // if the previous gear was a damage-boosting item
+					strmod -= gear.mod; // subtract the bonus the item gave from the damage bonus
 				} else {
-					defmod -= gear.mod;
+					defmod -= gear.mod; // otherwise subtract the bonus the item gave from the damage reduction bonus
 				}
+			} else { // if a gear item is being set, change the variable to reflect state
+				gearset = true; // lets the rest of the program know that a gear item has been set. It changes how some things are displayed
 			}
 
-			if (a.dmgBoost) {
-				strmod += a.mod;
-				dmg = str + strmod;
+			if (a.dmgBoost) { // if the new Item is a damage-boosting item
+				strmod += a.mod; // adds to the damage bonus total
 			} else {
-				defmod += a.mod;
-				dmgred = def + defmod;
+				defmod += a.mod; // otherwise, adds to the damage reduction bonus
 			}
-			gear = a;
+
+			dmg = str + strmod; // redefines damage
+			dmgred = def + defmod; // redefines the damage reduction stat
+			gear = a; // stores what the new gear item is
 		}
 	}
 
 	/**
-	 *
-	 * @param direction
-	 * @param spaces
+	 * this method checks if the movement of the player wants to achieve is legal and if it is, moves the character.
+	 * @param direction String
+	 * @param spaces int
 	 */
 	public void move(String direction, int spaces) {
+		// ABSTRACT THIS
 		if (direction.equals("up")) {
 			int newY = y - spaces;
 			if (newY <= 0) {
@@ -218,29 +219,29 @@ public class Player {
 	}
 
 	/**
-	 *
+	 * This method checks if the race the player wants to be has defined stats in the system. If not, the player has to enter a new race until it is one that's defined.
 	 * @param race
 	 */
 	private void legalRaceCheck(String race) {
-		boolean legal = false;
+		boolean legal = false; // used for the while loop so it can check if the race is legal
 		do {
-			for (int i = 0; i < races.length; i++) {
-				if (race.equals(races[i])) {
-					legal = true;
-					this.race = race;
+			for (int i = 0; i < races.length; i++) { // checks the entire races[] array
+				if (race.equals(races[i])) { // if there is a matching string
+					legal = true; // it's legal
+					this.race = race; //then sets the race
 				}
 			}
-			if (!legal) {
-				System.out.println("That is not an answer. What race would you like to be?");
-				race = reader.nextLine();
+			if (!legal) { // if it's not legal
+				System.out.println("That is not an answer. What race would you like to be?"); // asks for a new input
+				race = reader.nextLine(); // sets the new race String
 			}
-		} while (!legal);
+		} while (!legal); // keeps repeating until there's a legal race
 	}
 
 	/**
-	 *
+	 * This method sets the player's base stats based on their race.
 	 */
-	private void raceSet() {
+	private void raceSet() { // sets HP, str, def, and spd
 		if (race.equals("goblin")) {
 			HP = 3;
 			str = 2;
@@ -260,17 +261,17 @@ public class Player {
 	}
 
 	/**
-	 *
+	 * This toString() method prints out the stats of the character.
 	 */
 	public String toString() {
 		String s = "";
-		if (gearset && !gear.dmgBoost) {
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-					+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else if (gearset) {
+		if (gearset && !gear.dmgBoost) { // if the player has set gear and it increases dmg
 			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + " + " + gear.name
 					+")\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else {
+		} else if (gearset) { // if the player has set gear, but it increases defense
+s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
+		+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
+	} else { // if the player has no gear set
 			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
 					+ def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
 		}
