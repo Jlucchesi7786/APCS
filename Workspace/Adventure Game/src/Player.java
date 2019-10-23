@@ -223,25 +223,25 @@ public class Player {
 	 * @param race
 	 */
 	private void legalRaceCheck(String race) {
-		boolean legal = false;
+		boolean legal = false; // used for the while loop so it can check if the race is legal
 		do {
-			for (int i = 0; i < races.length; i++) {
-				if (race.equals(races[i])) {
-					legal = true;
-					this.race = race;
+			for (int i = 0; i < races.length; i++) { // checks the entire races[] array
+				if (race.equals(races[i])) { // if there is a matching string
+					legal = true; // it's legal
+					this.race = race; //then sets the race
 				}
 			}
-			if (!legal) {
-				System.out.println("That is not an answer. What race would you like to be?");
-				race = reader.nextLine();
+			if (!legal) { // if it's not legal
+				System.out.println("That is not an answer. What race would you like to be?"); // asks for a new input
+				race = reader.nextLine(); // sets the new race String
 			}
-		} while (!legal);
+		} while (!legal); // keeps repeating until there's a legal race
 	}
 
 	/**
 	 * This method sets the player's base stats based on their race.
 	 */
-	private void raceSet() {
+	private void raceSet() { // sets HP, str, def, and spd
 		if (race.equals("goblin")) {
 			HP = 3;
 			str = 2;
@@ -265,13 +265,13 @@ public class Player {
 	 */
 	public String toString() {
 		String s = "";
-		if (gearset && !gear.dmgBoost) {
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-					+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else if (gearset) {
+		if (gearset && !gear.dmgBoost) { // if the player has set gear and it increases dmg
 			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + " + " + gear.name
 					+")\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else {
+		} else if (gearset) { // if the player has set gear, but it increases defense
+s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
+		+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
+	} else { // if the player has no gear set
 			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
 					+ def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
 		}
