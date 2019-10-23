@@ -6,32 +6,32 @@ import java.util.Scanner;
  * @author Dr. Cheese
  */
 public class Player {
-	public int x; // holds the x value the character is at
-	public int y; // holds the y value the character is at
+	public int x;
+	public int y;
+	private Scanner reader = new Scanner(System.in);
 
-	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
+	public int str;
+	private int strmod = 0;
+	public int dmg = 2;
 
-	public int str; // holds the base damage the character would do, without any modifiers
-	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
-	public int dmg; // holds the total amount of damage the character will do
+	public int def;
+	private int defmod = 0;
+	public int dmgred = 2;
 
-	public int def; // holds the base damage reduction the character would apply
-	private int defmod = 0; // holds all of the bonuses to damage reduction the the character has from their equipment
-	public int dmgred; // holds the total amount of protection the character has from damage
+	public int spd;
+	public int HP;
+	public String name;
 
-	public int spd; // holds how many spaces the character can move in a turn
-	public int HP; // holds how much damage the character can take before dying
-	public String name; // holds the name of the character
+	String[] races = {"human", "orc", "goblin"};
+	String race;
 
-	String[] races = {"human", "orc", "goblin"}; // holds all of the legal races
-	String race; // holds what race the character is
+	public Item[] inventory = {new Item("Shortsword", 0)};
+	public Item weapon;
+	public Item gear;
+	boolean firstWeapon = true;
+	public boolean gearset;
 
-	public Item[] inventory = {new Item("Shortsword", 0)}; // the inventory[] array holds the character's inventory and is initialized with a Regular Shortsword
-	public Item weapon; // Holds what the character has currently equipped as their weapon
-	public Item gear; // holds what item the character has set for its gear, if any
-
-	boolean firstWeapon = true; // used on initialization to set the first weapon of the character
-	public boolean gearset; // tells if the character has set a gear item or not
+	public boolean moved = false;
 
 	/**
 	 * This constructor sets up the player with a character at some x and y decided by the author and a race set by the player
@@ -42,13 +42,13 @@ public class Player {
 		y = 1;
 
 		legalRaceCheck(race);
-		raceSet();
+		
 
 		equip(inventory[0]);
 	}
 
 	/**
-	 * This constructor sets up the player at an x and y position without initializing their inventory
+	 *
 	 */
 	Player() {
 		x = 30;
@@ -56,8 +56,8 @@ public class Player {
 	}
 
 	/**
-	 * This method lets the character add an item to their inventory
-	 * @param a Item object
+	 *
+	 * @param a
 	 */
 	public void get(Item a) {
 		ArrayList<Item> b = new ArrayList<Item>();
@@ -70,8 +70,8 @@ public class Player {
 	}
 
 	/**
-	 * 
-	 * @param a Item object
+	 *
+	 * @param a
 	 */
 	public void setWeapon(Item a) {
 		for (int i = 0; i < inventory.length; i++) {
@@ -185,7 +185,7 @@ public class Player {
 	 * @param spaces
 	 */
 	public void move(String direction, int spaces) {
-		boolean moved = false;
+		moved = false;
 		if (direction.equals("up")) {
 			int newY = y - spaces;
 			if (newY <= 0) {
@@ -223,7 +223,7 @@ public class Player {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param race
 	 */
 	private void legalRaceCheck(String race) {
@@ -241,22 +241,19 @@ public class Player {
 			}
 		} while (!legal);
 	}
-
-	/**
-	 *
-	 */
+	
 	private void raceSet() {
-		if (race.equals("goblin")) {
+		if (this.race.equals("goblin")) {
 			HP = 3;
 			str = 2;
 			def = 1;
 			spd = 2;
-		} else if (race.equals("human")) {
+		} else if (this.race.equals("human")) {
 			HP = 4;
 			str = 3;
 			def = 3;
 			spd = 1;
-		} else if (race.equals("orc")) {
+		} else if (this.race.equals("orc")) {
 			HP = 6;
 			str = 5;
 			def = 1;

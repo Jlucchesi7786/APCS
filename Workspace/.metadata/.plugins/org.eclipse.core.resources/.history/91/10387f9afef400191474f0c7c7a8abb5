@@ -5,25 +5,25 @@
 public class Room {
 	int width;
 	int height;
-
+	
 	Player player = new Player();
 
 	boolean checked = false;
 	boolean opened = false;
 	Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
 
-	String orientation;
+	//String orientation;
 
 	/**
-	 * This constructor makes a room with width and height. The playable area is a square/rectangle in the middle, with the walls taking up one space on each side
-	 * @param width int
-	 * @param height int
-	 * @param orientation String
+	 * 
+	 * @param width
+	 * @param height
+	 * @param orientation
 	 */
 	Room(int width, int height, String orientation) {
-		this.width = width;
-		this.height = height;
-		this.orientation = orientation; // orientation tells it where the entrance is
+		this.width = width + 2;
+		this.height = height + 2;
+		this.orientation = orientation;
 	}
 
 	/**
