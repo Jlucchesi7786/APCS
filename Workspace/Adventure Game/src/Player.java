@@ -70,7 +70,7 @@ public class Player {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param a Item object
 	 */
 	public void setWeapon(Item a) {
@@ -185,14 +185,12 @@ public class Player {
 	 * @param spaces
 	 */
 	public void move(String direction, int spaces) {
-		boolean moved = false;
 		if (direction.equals("up")) {
 			int newY = y - spaces;
 			if (newY <= 0) {
 				System.out.println("Your character can't move through walls.");
 			} else {
 				y = newY;
-				moved = true;
 			}
 		} else if (direction.equals("right")) {
 			int newX = x + spaces;
@@ -200,7 +198,6 @@ public class Player {
 				System.out.println("Your character can't move through walls.");
 			} else {
 				x = newX;
-				moved = true;
 			}
 		} else if (direction.equals("down")) {
 			int newY = y + spaces;
@@ -209,7 +206,6 @@ public class Player {
 				newY = y;
 			} else {
 				y = newY;
-				moved = true;
 			}
 		} else if (direction.equals("left")) {
 			int newX = x - spaces;
@@ -217,7 +213,6 @@ public class Player {
 				System.out.println("Your character can't move through walls.");
 			} else {
 				x = newX;
-				moved = true;
 			}
 		}
 	}

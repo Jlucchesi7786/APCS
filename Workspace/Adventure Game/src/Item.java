@@ -38,7 +38,7 @@ public class Item {
 		int rand = (int) Math.ceil(Math.random()*types.length)-1; // makes a random number to reference the types[] array
 		type = types[rand]; // uses the random number to get a random type;
 		itemMod = (int) Math.ceil(Math.random()*10); // makes a random bonus for the object, between 1 and 10
-		this(type, itemMod);
+		//this(type, itemMod);
 	}
 
 	/**
