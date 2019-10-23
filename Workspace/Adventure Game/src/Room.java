@@ -3,6 +3,7 @@
  * @author Dr. Cheese
  */
 public class Room {
+	// MAKE THE CLASS TAKE IN SMALLER ONES TO UPDATE THE FRAME
 	int width;
 	int height;
 
