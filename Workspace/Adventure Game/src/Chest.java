@@ -1,6 +1,8 @@
 /**
  * This class holds some basic information about the chests lying around the dungeon.
  * @author Dr. Cheese
+ * 
+ * 
  */
 public class Chest {
 	public int x; // the x coordinate where the chest is
