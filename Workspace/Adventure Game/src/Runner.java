@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Runner {
 	
-	static Room frame = new Room(32, 32, "down"); // Creates the room that the game works in
+	static Frame frame = new Frame(32, 32, "down"); // Creates the room that the game works in
 	static Chest[] Chests = frame.Chests; // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
