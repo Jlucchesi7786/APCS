@@ -46,7 +46,7 @@ public class Room {
 					s += "# ";
 				} else {
 					if (y == player.y && x == player.x) {
-						s += "@ ";
+						s += player.symbol.character;
 					} else if ((x == 0) || (x == width-1) || (x == 6) || (x == 25)) {
 						if ( ((y == 2 || y == 10 || y == 15 || y == 23) && x == 6) || ((y == 10 || y == 17 || y == 29) && x == 25) ) {
 							s += "| ";

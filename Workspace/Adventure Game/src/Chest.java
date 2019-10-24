@@ -5,8 +5,11 @@
 public class Chest {
 	public int x; // the x coordinate where the chest is
 	public int y; // the y coordinate where the chest is
+
 	boolean open; // holds the state of the chest
+
 	Item contents; // the Item inside the chest
+	Tile space;
 
 	/**
 	 * This constructor makes a new chest at an (x, y) coordinate set upon declaration.
@@ -16,8 +19,11 @@ public class Chest {
 	Chest(int x, int y) {
 		this.x = x; // sets the x coordinate of the chest's position
 		this.y = y; // sets the y coordinate of the chest's position
+
 		open = false; // sets the state of the chest to not open, or closed
+
 		contents = new Item(); // generates a random item to be inside the chest
+		space = new Tile("closed chest");
 	}
 
 	/**
@@ -25,5 +31,6 @@ public class Chest {
 	 */
 	public void open() {
 		open = true;
+		space.update("open chest");
 	}
 }

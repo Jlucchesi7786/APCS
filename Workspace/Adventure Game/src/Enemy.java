@@ -15,6 +15,8 @@ public class Enemy {
 	int playerX; // holds the player character's given x position
 	int playerY; // holds the player character's given y position
 
+	Tile space;
+
 	boolean pursuing = false; // this changes the state of the monster
 
 	/**
@@ -30,6 +32,7 @@ public class Enemy {
 		x = (int)(Math.ceil(Math.random()*30)); // makes a random x position
 		y = (int)(Math.ceil(Math.random()*30)); // makes a random y position
 		drop = new Item(); // sets up the monster drop with a random item
+		space = new Tile("monster");
 	}
 
 	/**

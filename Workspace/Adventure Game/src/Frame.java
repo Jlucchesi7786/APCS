@@ -45,7 +45,7 @@ public class Frame {
 					s += "# ";
 				} else {
 					if (y == player.y && x == player.x) {
-						s += "@ ";
+						s += player.symbol.character + " ";
 					} else if ((x == 0) || (x == width-1) || (x == 6) || (x == 25)) {
 						if ( ((y == 2 || y == 10 || y == 15 || y == 23) && x == 6) || ((y == 10 || y == 17 || y == 29) && x == 25) ) {
 							s += "| ";
@@ -77,7 +77,7 @@ public class Frame {
 	 * This method takes in a Player object to update where the character is to display it properly.
 	 * @param player Player object
 	 */
-	public void update(Player player) {
+	public void updatePlayer(Player player) {
 		this.player = player;
 	}
 
