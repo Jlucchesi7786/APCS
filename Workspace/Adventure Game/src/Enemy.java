@@ -3,8 +3,7 @@
  * @author Dr. Cheese
  */
 public class Enemy {
-	int x; // holds the x component of the instance's position
-	int y; // holds the y component of the instance's position
+	public Position pos;
 
 	int level; // holds how strong the monster should be, give or take
 	int str; // holds how much damage the monster will do
@@ -29,8 +28,9 @@ public class Enemy {
 		this.level = level;
 		str = (int)(Math.ceil(Math.random()*level)); // makes the damage the monster does randonly based on the level
 		def = (int)(Math.ceil(Math.random()*level)); // makes the amount the monster reduces damage by randomly based on the level
-		x = (int)(Math.ceil(Math.random()*30)); // makes a random x position
-		y = (int)(Math.ceil(Math.random()*30)); // makes a random y position
+		int x = (int)(Math.ceil(Math.random()*30)); // makes a random x position
+		int y = (int)(Math.ceil(Math.random()*30)); // makes a random y position
+		pos = new Position(x, y);
 		drop = new Item(); // sets up the monster drop with a random item
 		space = new Tile("monster");
 	}
@@ -42,8 +42,7 @@ public class Enemy {
 	 * @param level int
 	 */
 	Enemy(int x, int y, int level) {
-		this.x = x; // sets the x position to the given x
-		this.y = y; // sets the y position to the given y
+		pos = new Position(x, y);
 		this.level = level; // sets the level
 		str = (int)(Math.ceil(Math.random()*level)); // makes the damage the monster does randonly based on the level
 		def = (int)(Math.ceil(Math.random()*level)); // makes the amount the monster reduces damage by randomly based on the level

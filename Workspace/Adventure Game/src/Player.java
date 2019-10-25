@@ -6,11 +6,10 @@ import java.util.Scanner;
  * @author Dr. Cheese
  */
 public class Player {
-	public int x; // holds the x value the character is at
-	public int y; // holds the y value the character is at
+	public Position pos;
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
-	public Tile symbol = new Tile("player");
+	public Tile symbol = new Tile("player", new Position(1, 2));
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
@@ -39,8 +38,7 @@ public class Player {
 	 * @param race String
 	 */
 	Player(String race) {
-		x = 30; // sets the beginning x
-		y = 1; // sets the beginning y
+		pos = new Position(30, 1);
 
 		legalRaceCheck(race); // checks if the race the player wants to be is defined
 		raceSet(); // once the race is considered legal, the constructor sets up the base stats
@@ -52,8 +50,6 @@ public class Player {
 	 * This constructor sets up the player at an x and y position without initializing their inventory.
 	 */
 	Player() {
-		x = 30; // sets the beginning x
-		y = 1; // sets the beginning y
 	}
 
 	/**
@@ -188,33 +184,32 @@ public class Player {
 	public void move(String direction, int spaces) {
 		// ABSTRACT THIS
 		if (direction.equals("up")) {
-			int newY = y - spaces;
+			int newY = pos.y - spaces;
 			if (newY <= 0) {
 				System.out.println("Your character can't move through walls.");
 			} else {
-				y = newY;
+				pos.updateY(newY);
 			}
 		} else if (direction.equals("right")) {
-			int newX = x + spaces;
-			if ((newX >= 31) || (newX == 6 && y != 2 && y != 10 && y != 15 && y != 23) || (newX == 25 && y != 10 && y != 17 && y != 29)) {
+			int newX = pos.x + spaces;
+			if ((newX >= 31) || (newX == 6 && pos.y != 2 && pos.y != 10 && pos.y != 15 && pos.y != 23) || (newX == 25 && pos.y != 10 && pos.y != 17 && pos.y != 29)) {
 				System.out.println("Your character can't move through walls.");
 			} else {
-				x = newX;
+				pos.updateX(newX);
 			}
 		} else if (direction.equals("down")) {
-			int newY = y + spaces;
+			int newY = pos.y + spaces;
 			if (newY >= 31) {
 				System.out.println("Your character can't move through walls.");
-				newY = y;
 			} else {
-				y = newY;
+				pos.updateY(newY);
 			}
 		} else if (direction.equals("left")) {
-			int newX = x - spaces;
+			int newX = pos.x - spaces;
 			if (newX <= 0) {
 				System.out.println("Your character can't move through walls.");
 			} else {
-				x = newX;
+				pos.updateX(newX);
 			}
 		}
 	}

@@ -3,11 +3,14 @@ public class Tile {
   public String character;
   public String type;
 
+  public Position pos;
+
   private String[] types = {"horizontal door", "vertical door", "monster", "closed chest",
 		  "open chest", "player", "wall", "empty"};
   private String[] characters = {"-", "|", "X", "H", "O", "@", "#", " "};
 
-  public Tile(String type) {
+  public Tile(String type, Position position) {
+    
     this.type = type;
     charSet();
   }

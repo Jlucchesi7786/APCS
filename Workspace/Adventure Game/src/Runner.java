@@ -18,7 +18,7 @@ public class Runner {
 
 	static boolean PlayerTurn = true; // keeps track of when it's the Player's turn
 	static boolean EnemyTurn = false; // keeps track of when it's the monster's turn
-	static boolean startup = true; // tells the program to display the startup messages, or just go to default settings
+	static boolean startup = false; // tells the program to display the startup messages, or just go to default settings
 	static boolean running = false; // tells the program when the game part is running. Program will not stop if true
 
 	static String action = ""; // used to keep track of what the player has entered for the character to do
@@ -289,13 +289,13 @@ public class Runner {
 	 */
 	static void open() {
 		for (int i = 0; i < Chests.length ; i++) {
-			if ((Chests[i].x - you.x == -1) && (Chests[i].y == you.y)) { // checks if there is a chest 1 space to the left
+			if ((Chests[i].pos.x - you.pos.x == -1) && (Chests[i]pos.y == you.pos.y)) { // checks if there is a chest 1 space to the left
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].x - you.x == 1) && (Chests[i].y == you.y)) { // checks if there is a chest 1 space to the right
+			} else if ((Chests[i]pos.x - you.pos.x == 1) && (Chests[i]pos.y == you.pos.y)) { // checks if there is a chest 1 space to the right
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].y - you.y == -1) && (Chests[i].x == you.x)) { // checks if there is a chest 1 space up
+			} else if ((Chests[i]pos.y - you.pos.y == -1) && (Chests[i]pos.x == you.pos.x)) { // checks if there is a chest 1 space up
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].y - you.y == 1) && (Chests[i].x == you.x)) { // checks if there is a chest 1 space down
+			} else if ((Chests[i]pos.y - you.pos.y == 1) && (Chests[i]pos.x == you.pos.x)) { // checks if there is a chest 1 space down
 				Chests[i].open(); // runs the open() method on the chest that was found
 			}
 

@@ -12,6 +12,7 @@ public class Room {
 	boolean checked = false;
 	boolean opened = false;
 	Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
+	Wall[] Walls = {new Wall("horizontal", 32, 0, 0), new Wall("vertical", 30, 0, 1), new Wall("vertical", 30, 0, 1), new Wall("horizontal", 32, 0, 32)};
 
 	String orientation;
 
@@ -32,7 +33,7 @@ public class Room {
 	 */
 	public String toString() {
 		String s = "";
-		for (int y = 0; y < height; y++) {
+		/*for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (y == player.y && x == player.x) {
 					s += "@ ";
@@ -69,7 +70,7 @@ public class Room {
 
 			}
 			s += "\n";
-		}
+		}*/
 
 		return s;
 	}

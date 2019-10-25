@@ -3,8 +3,7 @@
  * @author Dr. Cheese
  */
 public class Chest {
-	public int x; // the x coordinate where the chest is
-	public int y; // the y coordinate where the chest is
+	public Position pos;
 
 	boolean open; // holds the state of the chest
 
@@ -17,8 +16,7 @@ public class Chest {
 	 * @param y int
 	 */
 	Chest(int x, int y) {
-		this.x = x; // sets the x coordinate of the chest's position
-		this.y = y; // sets the y coordinate of the chest's position
+		pos = new Position(x, y);
 
 		open = false; // sets the state of the chest to not open, or closed
 

@@ -26,6 +26,10 @@ public class Frame {
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
 
+	Frame(Room[] rooms) {
+
+	}
+
 	/**
 	 * This toString() method constructs a string with all of the symbols and the empty space in the frame
 	 */
@@ -33,7 +37,7 @@ public class Frame {
 		String s = "";
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				if (y == player.y && x == player.x) {
+				if (y == player.pos.y && x == player.pos.x) {
 					s += "@ ";
 				} else if (y == 0 || y == height-1 || (y == 14 && x > 6)  || (y == 18 && x > 25) || (y == 18 && x < 6) || (y == 25 && x > 25) || (y == 29 && x < 6)) {
 					if ((x == (width/2)-1 && y == height-1) || (x == 27 && y == 25) || (x == 5 && y == 29)) {
@@ -44,7 +48,7 @@ public class Frame {
 				} else if ((y == 4) && (x<6)) {
 					s += "# ";
 				} else {
-					if (y == player.y && x == player.x) {
+					if (y == player.pos.y && x == player.pos.x) {
 						s += player.symbol.character + " ";
 					} else if ((x == 0) || (x == width-1) || (x == 6) || (x == 25)) {
 						if ( ((y == 2 || y == 10 || y == 15 || y == 23) && x == 6) || ((y == 10 || y == 17 || y == 29) && x == 25) ) {
@@ -89,7 +93,7 @@ public class Frame {
 	 */
 	boolean chestCheck(int x, int y) {
 		for (int i = 0; i < Chests.length; i++) {
-			if (x == Chests[i].x && y == Chests[i].y) {
+			if (x == Chests[i].pos.x && y == Chests[i].pos.y) {
 				if (Chests[i].open) {
 					opened = true;
 				}
