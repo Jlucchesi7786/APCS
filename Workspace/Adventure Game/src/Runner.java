@@ -289,13 +289,13 @@ public class Runner {
 	 */
 	static void open() {
 		for (int i = 0; i < Chests.length ; i++) {
-			if ((Chests[i].pos.x - you.pos.x == -1) && (Chests[i]pos.y == you.pos.y)) { // checks if there is a chest 1 space to the left
+			if ((Chests[i].pos.x - you.pos.x == -1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the left
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i]pos.x - you.pos.x == 1) && (Chests[i]pos.y == you.pos.y)) { // checks if there is a chest 1 space to the right
+			} else if ((Chests[i].pos.x - you.pos.x == 1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the right
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i]pos.y - you.pos.y == -1) && (Chests[i]pos.x == you.pos.x)) { // checks if there is a chest 1 space up
+			} else if ((Chests[i].pos.y - you.pos.y == -1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space up
 				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i]pos.y - you.pos.y == 1) && (Chests[i]pos.x == you.pos.x)) { // checks if there is a chest 1 space down
+			} else if ((Chests[i].pos.y - you.pos.y == 1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space down
 				Chests[i].open(); // runs the open() method on the chest that was found
 			}
 

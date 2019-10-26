@@ -15,7 +15,7 @@ public class Wall {
     this.length = length;
     this.xStart = positionXstart;
     this.yStart = positionYstart;
-    space = new Tile("wall");
+    space = new Tile("wall", new Position(xStart, yStart));
 
     if (orientation.equals("horizontal")) {
       horizontalSetup();

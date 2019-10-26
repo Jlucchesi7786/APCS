@@ -32,7 +32,7 @@ public class Enemy {
 		int y = (int)(Math.ceil(Math.random()*30)); // makes a random y position
 		pos = new Position(x, y);
 		drop = new Item(); // sets up the monster drop with a random item
-		space = new Tile("monster");
+		space = new Tile("monster", pos);
 	}
 
 	/**

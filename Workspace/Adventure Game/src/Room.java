@@ -91,7 +91,7 @@ public class Room {
 	 */
 	boolean chestCheck(int x, int y) {
 		for (int i = 0; i < Chests.length; i++) {
-			if (x == Chests[i].x && y == Chests[i].y) {
+			if (x == Chests[i].pos.x && y == Chests[i].pos.y) {
 				if (Chests[i].open) {
 					opened = true;
 				}
