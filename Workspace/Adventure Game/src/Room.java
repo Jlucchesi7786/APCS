@@ -2,7 +2,7 @@
  * This class controls the frame that the player is in.
  * @author Dr. Cheese
  */
-public class Room {
+public class Room extends Compiler {
 	// MAKE THE CLASS TAKE IN SMALLER ONES TO UPDATE THE FRAME
 	int width;
 	int height;
@@ -11,7 +11,7 @@ public class Room {
 
 	boolean checked = false;
 	boolean opened = false;
-	Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
+	//Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
 	Wall[] Walls = {new Wall("horizontal", 32, 0, 0), new Wall("vertical", 30, 0, 1), new Wall("vertical", 30, 0, 1), new Wall("horizontal", 32, 0, 32)};
 
 	String orientation;
@@ -23,6 +23,7 @@ public class Room {
 	 * @param orientation String
 	 */
 	Room(int width, int height, String orientation) {
+		super(width, height);
 		this.width = width;
 		this.height = height;
 		this.orientation = orientation; // orientation tells it where the entrance is
@@ -33,6 +34,14 @@ public class Room {
 	 */
 	public String toString() {
 		String s = "";
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				s += map[x][y].character + " ";
+				if (y == width-1) {
+					s += "\n";
+				}
+			}
+		}
 		/*for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (y == player.y && x == player.x) {

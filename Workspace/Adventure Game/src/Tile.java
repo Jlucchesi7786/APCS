@@ -10,7 +10,12 @@ public class Tile {
   private String[] characters = {"-", "|", "X", "H", "O", "@", "#", " "};
 
   public Tile(String type, Position position) {
-    
+
+    this.type = type;
+    charSet();
+  }
+
+  public Tile(String type) {
     this.type = type;
     charSet();
   }

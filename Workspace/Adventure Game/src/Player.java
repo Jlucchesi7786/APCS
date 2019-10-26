@@ -182,6 +182,7 @@ public class Player {
 	 * @param spaces int
 	 */
 	public void move(String direction, int spaces) {
+		String[] directions = {"up"};
 		// ABSTRACT THIS
 		if (direction.equals("up")) {
 			int newY = pos.y - spaces;
