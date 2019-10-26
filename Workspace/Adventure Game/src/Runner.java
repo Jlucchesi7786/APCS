@@ -33,6 +33,7 @@ public class Runner {
 		do {
 			frame.updatePlayer(you); // tells the frame where the player is
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
+			System.out.println(frame);
 
 			if (PlayerTurn) {
 				takeAction(); // if it's the player's turn, they can enter in commands, then it lets the enemies have a go

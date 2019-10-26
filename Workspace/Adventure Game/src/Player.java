@@ -9,7 +9,7 @@ public class Player {
 	public Position pos;
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
-	public Tile symbol = new Tile("player", new Position(1, 2));
+	public Tile symbol = new Tile("player");
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment

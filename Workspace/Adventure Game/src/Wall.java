@@ -1,39 +1,71 @@
+import java.util.*;
 
 public class Wall {
-  public int length;
-  public int xStart;
-  public int yStart;
+	public int length;
+	public int xStart;
+	public int yStart;
 
-  public boolean horizontal;
-  public boolean vertical;
+	public boolean horizontal;
+	public boolean vertical;
 
-  public String drawing;
+	public Tile space;
+	public Position[] spaces = {};
 
-  public Tile space;
+	public Wall(String orientation, int length, int positionXstart, int positionYstart) {
+		this.length = length;
+		this.xStart = positionXstart;
+		this.yStart = positionYstart;
+		space = new Tile("wall");
 
-  public Wall(String orientation, int length, int positionXstart, int positionYstart) {
-    this.length = length;
-    this.xStart = positionXstart;
-    this.yStart = positionYstart;
-    space = new Tile("wall", new Position(xStart, yStart));
+		if (orientation.equals("horizontal")) {
+			horizontalSetup();
 
-    if (orientation.equals("horizontal")) {
-      horizontalSetup();
-    } else if (orientation.equals("vertical")) {
-      verticalSetup();
-    }
-  }
+		} else if (orientation.equals("vertical")) {
+			verticalSetup();
+		}
+	}
 
-  private void horizontalSetup() {
-    for (int i = 0; i < length; i++) {
-      drawing += space.character + " ";
-    }
-    horizontal = true;
-    vertical = false;
-  }
+	private void horizontalSetup() {
+		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
+		for (int i = 0; i < length; i++) {
+			spacesList.add(new Position(yStart, xStart+i));
+		}
+		spaces = new Position[spacesList.size()];
+		spacesList.toArray(spaces);
 
-  private void verticalSetup() {
-    horizontal = true;
-    vertical = false;
-  }
+		horizontal = true;
+		vertical = false;
+	}
+
+	private void verticalSetup() {
+		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
+		for (int i = 0; i < length; i++) {
+			spacesList.add(new Position(yStart+i, xStart));
+		}
+		spaces = new Position[spacesList.size()];
+		spacesList.toArray(spaces);
+
+		horizontal = false;
+		vertical = true;
+	}
+	
+	public boolean checkSpaces(int x, int y) {
+		for (int i = 0; i < length; i++) {
+			if (spaces[i].x == x && spaces[i].y == y) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+
+	
+	public boolean checkSpaces(Position other) {
+		for (int i = 0; i < length; i++) {
+			if (spaces[i].equals(other)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

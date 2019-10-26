@@ -21,7 +21,7 @@ public class Chest extends Item {
 		open = false; // sets the state of the chest to not open, or closed
 
 		contents = new Item(); // generates a random item to be inside the chest
-		space = new Tile("closed chest", pos);
+		space = new Tile("closed chest");
 	}
 
 	/**

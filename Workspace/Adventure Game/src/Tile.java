@@ -3,21 +3,18 @@ public class Tile {
   public String character;
   public String type;
 
-  public Position pos;
-
   private String[] types = {"horizontal door", "vertical door", "monster", "closed chest",
 		  "open chest", "player", "wall", "empty"};
   private String[] characters = {"-", "|", "X", "H", "O", "@", "#", " "};
 
-  public Tile(String type, Position position) {
-
-    this.type = type;
-    charSet();
-  }
-
   public Tile(String type) {
     this.type = type;
     charSet();
+  }
+  
+  public Tile() {
+	  this.type = types[(int) Math.ceil(Math.random()*types.length)];
+	  charSet();
   }
 
   public void update(String type) {
@@ -31,5 +28,12 @@ public class Tile {
         character = characters[i];
       }
     }
+  }
+  
+  public boolean equals(Tile other) {
+	  if (this.character == other.character) {
+		  return true;
+	  }
+	  return false;
   }
 }
