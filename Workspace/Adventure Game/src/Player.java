@@ -182,59 +182,32 @@ public class Player {
 	 * @param spaces int
 	 */
 	public void move(String direction, int spaces) {
-		Position newPos;
+		System.out.println("old Position: " + pos);
+		Position newPos = new Position(0,0);
+		//System.out.println("up: " + map[pos.y-1][pos.x].type + "\nright: " + map[pos.y][pos.x+1].type + "\ndown: " + map[pos.y+1][pos.x].type + "\nleft: " + map[pos.y][pos.x-1].type);
 		if (direction.equals("up")) {
 			newPos = new Position(pos.x, pos.y-spaces);
-			if (map[pos.x][pos.y-1].type.equals("empty space")) {
+			if (map[pos.y-1][pos.x].type.equals("empty")) {
 				pos = newPos;
 			}
 		} else if (direction.equals("right")) {
 			newPos = new Position(pos.x+spaces, pos.y);
-			if (map[pos.x+1][pos.y].type.equals("empty space")) {
+			if (map[pos.y][pos.x+1].type.equals("empty")) {
 				pos = newPos;
 			}
 		} else if (direction.equals("down")) {
 			newPos = new Position(pos.x, pos.y+spaces);
-			if (map[pos.x][pos.y+1].type.equals("empty space")) {
+			System.out.println(map[pos.x][pos.y+1].type);
+			if (map[pos.y+1][pos.x].type.equals("empty")) {
 				pos = newPos;
 			}
 		} else if (direction.equals("left")) {
 			newPos = new Position(pos.x-spaces, pos.y);
-			if (map[pos.x-1][pos.y].type.equals("empty space")) {
+			if (map[pos.y][pos.x-1].type.equals("empty")) {
 				pos = newPos;
 			}
+			System.out.println("new position is: " + pos);
 		}
-		/*String[] directions = {"up"};
-		// ABSTRACT THIS
-		if (direction.equals("up")) {
-			int newY = pos.y - spaces;
-			if (newY <= 0) {
-				System.out.println("Your character can't move through walls.");
-			} else {
-				pos.updateY(newY);
-			}
-		} else if (direction.equals("right")) {
-			int newX = pos.x + spaces;
-			if ((newX >= 31) || (newX == 6 && pos.y != 2 && pos.y != 10 && pos.y != 15 && pos.y != 23) || (newX == 25 && pos.y != 10 && pos.y != 17 && pos.y != 29)) {
-				System.out.println("Your character can't move through walls.");
-			} else {
-				pos.updateX(newX);
-			}
-		} else if (direction.equals("down")) {
-			int newY = pos.y + spaces;
-			if (newY >= 31) {
-				System.out.println("Your character can't move through walls.");
-			} else {
-				pos.updateY(newY);
-			}
-		} else if (direction.equals("left")) {
-			int newX = pos.x - spaces;
-			if (newX <= 0) {
-				System.out.println("Your character can't move through walls.");
-			} else {
-				pos.updateX(newX);
-			}
-		}*/
 	}
 	
 	public void getMap(Tile[][] map) {
