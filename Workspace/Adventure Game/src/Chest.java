@@ -16,7 +16,12 @@ public class Chest extends Item {
 	 * @param y int
 	 */
 	Chest(int x, int y) {
-		pos = new Position(x, y);
+		this(new Position(x,y));
+	}
+	
+
+	Chest(Position pos) {
+		this.pos = pos;
 
 		open = false; // sets the state of the chest to not open, or closed
 

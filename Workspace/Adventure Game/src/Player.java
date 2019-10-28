@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * This class holds a bunch of the information about the character
@@ -9,7 +8,7 @@ public class Player {
 	public Position pos;
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
-	public Tile symbol = new Tile("player");
+	public Tile space = new Tile("player");
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
@@ -118,7 +117,7 @@ public class Player {
 	 * This method sets the character's equipped gear using the name of the gear.
 	 * @param name String
 	 */
-	public void setGearByName(String type) {
+	public void setGearByName(String name) {
 		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
 			if (name.equals(inventory[i].name)) { // checks for a matching name in the inventory
 				equip(inventory[i]); // equips it if there is

@@ -22,10 +22,10 @@ public class Room extends Compiler {
 	 * @param height int
 	 * @param orientation String
 	 */
-	Room(int width, int height, String orientation) {
-		super(width, height);
-		this.width = width;
-		this.height = height;
+	Room(int width, int height, String orientation, Player player) {
+		super(width+2, height+2, player);
+		this.width = width+2;
+		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
 
@@ -88,7 +88,8 @@ public class Room extends Compiler {
 	 * This method takes in a Player object to update where the character is to display it properly.
 	 * @param player Player object
 	 */
-	public void update(Player player) {
+	public void updatePlayer(Player player) {
+		super.update(player);
 		this.player = player;
 	}
 

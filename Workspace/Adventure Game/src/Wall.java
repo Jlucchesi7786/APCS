@@ -4,6 +4,7 @@ public class Wall {
 	public int length;
 	public int xStart;
 	public int yStart;
+	public Position startPos;
 
 	public boolean horizontal;
 	public boolean vertical;
@@ -12,9 +13,14 @@ public class Wall {
 	public Position[] spaces = {};
 
 	public Wall(String orientation, int length, int positionXstart, int positionYstart) {
+		this(orientation, length, new Position(positionXstart, positionYstart));
+	}
+	
+	public Wall(String orientation, int length, Position startPos) {
 		this.length = length;
-		this.xStart = positionXstart;
-		this.yStart = positionYstart;
+		this.xStart = startPos.x;
+		this.yStart = startPos.y;
+		this.startPos = startPos;
 		space = new Tile("wall");
 
 		if (orientation.equals("horizontal")) {
@@ -27,8 +33,9 @@ public class Wall {
 
 	private void horizontalSetup() {
 		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
-		for (int i = 0; i < length; i++) {
-			spacesList.add(new Position(yStart, xStart+i));
+		spacesList.add(startPos);
+		for (int i = 1; i < length; i++) {
+			spacesList.add(new Position(startPos.y, startPos.x+i));
 		}
 		spaces = new Position[spacesList.size()];
 		spacesList.toArray(spaces);
@@ -39,8 +46,9 @@ public class Wall {
 
 	private void verticalSetup() {
 		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
-		for (int i = 0; i < length; i++) {
-			spacesList.add(new Position(yStart+i, xStart));
+		spacesList.add(startPos);
+		for (int i = 1; i < length; i++) {
+			spacesList.add(new Position(startPos.y+i, startPos.x));
 		}
 		spaces = new Position[spacesList.size()];
 		spacesList.toArray(spaces);

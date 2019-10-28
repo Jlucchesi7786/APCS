@@ -21,10 +21,20 @@ public class Position {
     this.y = newY;
   }
   
+  public void flipPosition() {
+	  int a = this.x;
+	  this.x = this.y;
+	  this.y = a;
+  }
+  
   public boolean equals(Position other) {
 	  if (this.x == other.x && this.y == other.y) {
 		  return true;
 	  }
 	  return false;
+  }
+  
+  public String toString() {
+	  return "x: " + this.x + "   y: " + this.y;
   }
 }
