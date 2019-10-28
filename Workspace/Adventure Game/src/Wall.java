@@ -35,11 +35,11 @@ public class Wall {
 		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
 		spacesList.add(startPos);
 		for (int i = 1; i < length; i++) {
-			spacesList.add(new Position(startPos.y, startPos.x+i));
+			spacesList.add(new Position(startPos.x+i, startPos.y));
 		}
 		spaces = new Position[spacesList.size()];
 		spacesList.toArray(spaces);
-
+		
 		horizontal = true;
 		vertical = false;
 	}
@@ -48,7 +48,7 @@ public class Wall {
 		ArrayList<Position> spacesList = new ArrayList<Position>(); // makes an ArrayList
 		spacesList.add(startPos);
 		for (int i = 1; i < length; i++) {
-			spacesList.add(new Position(startPos.y+i, startPos.x));
+			spacesList.add(new Position(startPos.x, startPos.y+i));
 		}
 		spaces = new Position[spacesList.size()];
 		spacesList.toArray(spaces);

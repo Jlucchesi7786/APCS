@@ -12,7 +12,7 @@ public class Room extends Compiler {
 	boolean checked = false;
 	boolean opened = false;
 	//Chest[] Chests = {new Chest(1, 30), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
-	Wall[] Walls = {new Wall("horizontal", 32, 0, 0), new Wall("vertical", 30, 0, 1), new Wall("vertical", 30, 0, 1), new Wall("horizontal", 32, 0, 32)};
+	//Wall[] Walls = {new Wall("horizontal", 32, 0, 0), new Wall("vertical", 30, 0, 1), new Wall("vertical", 30, 0, 1), new Wall("horizontal", 32, 0, 32)};
 
 	String orientation;
 
@@ -34,53 +34,15 @@ public class Room extends Compiler {
 	 */
 	public String toString() {
 		String s = "";
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
+		for (int x = 0; x < height; x++) {
+			for (int y = 0; y < width; y++) {
 				s += map[x][y].character + " ";
 				if (y == width-1) {
 					s += "\n";
 				}
 			}
 		}
-		/*for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				if (y == player.y && x == player.x) {
-					s += "@ ";
-				} else if (y == 0 || y == height-1 || (y == 14 && x > 6)  || (y == 18 && x > 25) || (y == 18 && x < 6) || (y == 25 && x > 25) || (y == 29 && x < 6)) {
-					if ((x == (width/2)-1 && y == height-1) || (x == 27 && y == 25) || (x == 5 && y == 29)) {
-						s += "- ";
-					} else {
-						s += "# ";
-					}
-				} else if ((y == 4) && (x<6)) {
-					s += "# ";
-				} else {
-					if (y == player.y && x == player.x) {
-						s += player.symbol.character;
-					} else if ((x == 0) || (x == width-1) || (x == 6) || (x == 25)) {
-						if ( ((y == 2 || y == 10 || y == 15 || y == 23) && x == 6) || ((y == 10 || y == 17 || y == 29) && x == 25) ) {
-							s += "| ";
-						} else {
-							s += "# ";
-						}
-					} else  {
-						if (chestCheck(x, y)) {
-							if (opened) {
-								s += "O ";
-								opened = false;
-							} else {
-								s += "H ";
-							}
-						} else {
-							s += "  ";
-						}
-					}
-				}
-
-			}
-			s += "\n";
-		}*/
-
+		
 		return s;
 	}
 
@@ -91,23 +53,5 @@ public class Room extends Compiler {
 	public void updatePlayer(Player player) {
 		super.update(player);
 		this.player = player;
-	}
-
-	/**
-	 * This method checks if there is a chest on a given tile
-	 * @param x int
-	 * @param y int
-	 * @return boolean (if chest is there)
-	 */
-	boolean chestCheck(int x, int y) {
-		for (int i = 0; i < Chests.length; i++) {
-			if (x == Chests[i].pos.x && y == Chests[i].pos.y) {
-				if (Chests[i].open) {
-					opened = true;
-				}
-				return true;
-			}
-		}
-		return false;
 	}
 }
