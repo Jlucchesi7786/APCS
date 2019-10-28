@@ -9,6 +9,7 @@ public class Player {
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
 	public Tile space = new Tile("player");
+	public Tile[][] map = {};
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
@@ -181,7 +182,29 @@ public class Player {
 	 * @param spaces int
 	 */
 	public void move(String direction, int spaces) {
-		String[] directions = {"up"};
+		Position newPos;
+		if (direction.equals("up")) {
+			newPos = new Position(pos.x, pos.y-spaces);
+			if (map[pos.x][pos.y-1].type.equals("empty space")) {
+				pos = newPos;
+			}
+		} else if (direction.equals("right")) {
+			newPos = new Position(pos.x+spaces, pos.y);
+			if (map[pos.x+1][pos.y].type.equals("empty space")) {
+				pos = newPos;
+			}
+		} else if (direction.equals("down")) {
+			newPos = new Position(pos.x, pos.y+spaces);
+			if (map[pos.x][pos.y+1].type.equals("empty space")) {
+				pos = newPos;
+			}
+		} else if (direction.equals("left")) {
+			newPos = new Position(pos.x-spaces, pos.y);
+			if (map[pos.x-1][pos.y].type.equals("empty space")) {
+				pos = newPos;
+			}
+		}
+		/*String[] directions = {"up"};
 		// ABSTRACT THIS
 		if (direction.equals("up")) {
 			int newY = pos.y - spaces;
@@ -211,7 +234,11 @@ public class Player {
 			} else {
 				pos.updateX(newX);
 			}
-		}
+		}*/
+	}
+	
+	public void getMap(Tile[][] map) {
+		this.map = map;
 	}
 
 	/**

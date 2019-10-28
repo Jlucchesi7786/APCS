@@ -54,4 +54,8 @@ public class Room extends Compiler {
 		super.update(player);
 		this.player = player;
 	}
+	
+	public Tile getTile(Position tilePos) {
+		return map[tilePos.x][tilePos.y];
+	}
 }

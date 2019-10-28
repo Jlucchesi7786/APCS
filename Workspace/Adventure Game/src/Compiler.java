@@ -23,21 +23,16 @@ public class Compiler {
 
 	public void compileTiles() {
 		ArrayList<Tile[]> mapList = new ArrayList<Tile[]>();
-		int i = 0;
-		int a = 0;
 		for (int y = 0; y < height; y++) {
 			ArrayList<Tile> rowList = new ArrayList<Tile>();
 			for (int x = 0; x < width; x++) {
 				if (x == 0 || x == width-1) {
 					rowList.add(new Tile("wall"));
-					a++;
 				} else {
 					Position gridPos = new Position(x, y);
 					//System.out.println(gridPos);
 					if (y == 0 || y == height-1) {
 						rowList.add(new Tile("wall"));
-						//System.out.println("yes");
-						a++;
 					} else {
 						boolean added = false;
 
@@ -45,21 +40,18 @@ public class Compiler {
 							if (Chests[c].pos.equals(gridPos)) {
 								rowList.add(Chests[c].space);
 								added = true;
-								a++;
 							}
 						}
 
 						if (player.pos.equals(gridPos)) {
 							rowList.add(player.space);
 							added = true;
-							a++;
 						}
 
 						for (int c = 0; c < doors.length; c++) {
 							if (doors[c].pos.equals(gridPos) && !added) {
 								rowList.add(doors[c].space);
 								added = true;
-								a++;
 							}
 						}
 
@@ -67,29 +59,22 @@ public class Compiler {
 							if (walls[c].checkSpaces(gridPos) && !added) {
 								rowList.add(walls[c].space);
 								added = true;
-								a++;
 							}
 						}
 
 						if (!added) {
 							rowList.add(new Tile("empty"));
-							a++;
 						}
 					}
 				}
-				i++;
 			}
 			
 			Tile[] rowArray = new Tile[rowList.size()];
 			rowList.toArray(rowArray);
 			mapList.add(rowArray);
-			System.out.println(rowArray.length);
 		}
 		map = new Tile[mapList.size()][];
 		mapList.toArray(map);
-		System.out.println("big; " + map.length);
-		
-		System.out.println(i + " = " + a);
 	}
 
 	public void update(Player player) {

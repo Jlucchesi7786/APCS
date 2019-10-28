@@ -37,4 +37,12 @@ public class Position {
   public String toString() {
 	  return "x: " + this.x + "   y: " + this.y;
   }
+  
+  public int getX() {
+	  return x;
+  }
+  
+  public int getY() {
+	  return y;
+  }
 }
