@@ -167,10 +167,10 @@ public class Player {
 	
 	private Tile[] getDirections() {
 		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
-		tileList.add(map[pos.y-1][pos.x]); // up
-		tileList.add(map[pos.y][pos.x+1]); // right
-		tileList.add(map[pos.y+1][pos.x]); // down
-		tileList.add(map[pos.y][pos.x-1]); // left
+		tileList.add(map[pos.x][pos.y-1]); // up
+		tileList.add(map[pos.x+1][pos.y]); // right
+		tileList.add(map[pos.x][pos.y+1]); // down
+		tileList.add(map[pos.x-1][pos.y]); // left
 		Tile[] Directions = new Tile[tileList.size()];
 		tileList.toArray(Directions);
 		return Directions;

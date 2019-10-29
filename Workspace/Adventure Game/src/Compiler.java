@@ -33,15 +33,15 @@ public class Compiler {
 	 */
 	public void compileTiles() {
 		ArrayList<Tile[]> mapList = new ArrayList<Tile[]>();
-		for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
 			ArrayList<Tile> rowList = new ArrayList<Tile>();
-			for (int x = 0; x < width; x++) {
-				if (x == 0 || x == width-1) {
+			for (int y = 0; y < height; y++) {
+				if (y == 0 || y == height-1) {
 					rowList.add(new Tile("wall"));
 				} else {
 					Position gridPos = new Position(x, y);
 					//System.out.println(gridPos);
-					if (y == 0 || y == height-1) {
+					if (x == 0 || x == width-1) {
 						rowList.add(new Tile("wall"));
 					} else {
 						boolean added = false;

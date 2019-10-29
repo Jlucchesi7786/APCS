@@ -36,7 +36,7 @@ public class Room extends Compiler {
 		
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				s += map[y][x].character + " ";
+				s += map[x][y].character + " ";
 				
 				if (x == width-1) {
 					s += "\n";
