@@ -50,6 +50,7 @@ public class Player {
 	 * This constructor sets up the player at an x and y position without initializing their inventory.
 	 */
 	Player() {
+		this("goblin");
 	}
 
 	/**
@@ -67,30 +68,6 @@ public class Player {
 	}
 
 	/**
-	 * This method sets the character's equipped weapon using a passed item object.
-	 * @param weapon Item object
-	 */
-	public void setWeapon(Item weapon) {
-		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
-			if (weapon.name.equals(inventory[i].name)) { // checks for a matching name in the inventory
-				equip(inventory[i]); // equips it if there is
-			}
-		}
-	}
-
-	/**
-	 * This method sets the character's equipped weapon using the type of the weapon.
-	 * @param type String
-	 */
-	public void setWeaponByType(String type) {
-		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
-			if (type.equals(inventory[i].type)) { // checks for a matching type in the inventory
-				equip(inventory[i]); // equips it if there is
-			}
-		}
-	}
-
-	/**
 	 * This method sets the character's equipped weapon using the type of the weapon.
 	 * @param name String
 	 */
@@ -103,36 +80,12 @@ public class Player {
 	}
 
 	/**
-	 * This method sets the character's equipped gear using a passed item object.
-	 * @param gear Item object
-	 */
-	public void setGear(Item gear) {
-		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
-			if (gear.name.equals(inventory[i].name)) { // checks for a matching name in the inventory
-				equip(inventory[i]); // equips it if there is
-			}
-		}
-	}
-
-	/**
 	 * This method sets the character's equipped gear using the name of the gear.
 	 * @param name String
 	 */
 	public void setGearByName(String name) {
 		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
 			if (name.equals(inventory[i].name)) { // checks for a matching name in the inventory
-				equip(inventory[i]); // equips it if there is
-			}
-		}
-	}
-
-	/**
-	 * This method sets the character's equipped gear using the type of the gear.
-	 * @param type String
-	 */
-	public void setGearByType(String type) {
-		for (int i = 0; i < inventory.length; i++) { // checks the entire inventory
-			if (type.equals(inventory[i].type)) { // checks for a matching type in the inventory
 				equip(inventory[i]); // equips it if there is
 			}
 		}
@@ -182,36 +135,42 @@ public class Player {
 	 * @param spaces int
 	 */
 	public void move(String direction, int spaces) {
-		System.out.println("old Position: " + pos);
 		Position newPos = new Position(0,0);
-		//System.out.println("up: " + map[pos.y-1][pos.x].type + "\nright: " + map[pos.y][pos.x+1].type + "\ndown: " + map[pos.y+1][pos.x].type + "\nleft: " + map[pos.y][pos.x-1].type);
 		if (direction.equals("up")) {
 			newPos = new Position(pos.x, pos.y-spaces);
-			if (map[pos.y-1][pos.x].type.equals("empty")) {
-				pos = newPos;
-			}
 		} else if (direction.equals("right")) {
 			newPos = new Position(pos.x+spaces, pos.y);
-			if (map[pos.y][pos.x+1].type.equals("empty")) {
-				pos = newPos;
-			}
 		} else if (direction.equals("down")) {
 			newPos = new Position(pos.x, pos.y+spaces);
-			System.out.println(map[pos.x][pos.y+1].type);
-			if (map[pos.y+1][pos.x].type.equals("empty")) {
-				pos = newPos;
-			}
 		} else if (direction.equals("left")) {
 			newPos = new Position(pos.x-spaces, pos.y);
-			if (map[pos.y][pos.x-1].type.equals("empty")) {
-				pos = newPos;
-			}
-			System.out.println("new position is: " + pos);
+		}
+		
+		if (legalMoveCheck(direction) == true) {
+			pos = newPos;
 		}
 	}
 	
 	public void getMap(Tile[][] map) {
 		this.map = map;
+	}
+	
+	private boolean legalMoveCheck(String direction) {
+		String tileType = "";
+		if (direction.equals("up")) {
+			tileType = map[pos.y-1][pos.x].type;
+		} else if (direction.equals("right")) {
+			tileType = map[pos.y][pos.x+1].type;
+		} else if (direction.equals("down")) {
+			tileType = map[pos.y+1][pos.x].type;
+		} else if (direction.equals("left")) {
+			tileType = map[pos.y][pos.x-1].type;
+		}
+		
+		if (tileType.equals("empty") || tileType.equals("horizontal door") || tileType.equals("vertical door")) {
+			return true;
+		}
+		return false;
 	}
 
 	/**

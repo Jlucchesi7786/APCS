@@ -4,7 +4,7 @@ public class Compiler {
 	public Chest[] Chests = {new Chest(new Position(1, 30)), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
 	public Tile[][] map = {};
 	public Wall[] walls = {new Wall("vertical", 30, 6, 1), new Wall("horizontal", 5, 1, 4), new Wall("horizontal", 25, 6, 14), new Wall("vertical", 30, 25, 1)};
-	public Door[] doors = {new Door(new Position(6, 2), "unlocked", "vertical")};
+	public Door[] doors = {new Door(new Position(6, 2), "unlocked", "vertical"), new Door(new Position(25, 10), "unlocked", "vertical"), new Door(new Position(27, 5), "unlocked", "horizontal")};
 	public Player player;
 
 	private int width;
@@ -18,7 +18,7 @@ public class Compiler {
 	}
 
 	public Compiler() {
-		compileTiles();
+		this(32, 32, new Player());
 	}
 
 	public void compileTiles() {
