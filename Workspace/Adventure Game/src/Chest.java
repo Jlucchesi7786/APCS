@@ -2,7 +2,7 @@
  * This class holds some basic information about the chests lying around the dungeon.
  * @author Dr. Cheese
  */
-public class Chest extends Item {
+public class Chest {
 	public Position pos;
 
 	boolean open; // holds the state of the chest

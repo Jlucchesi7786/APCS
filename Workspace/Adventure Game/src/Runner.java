@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Runner {
 	static Room frame2;
 	//static Frame frame = new Frame(32, 32, "down"); // Creates the room that the game works in
-	//static Chest[] Chests = frame2.Chests; // takes the Chests[] array from the frame and lets it be used in Runner
+	//static Chest[] Chests = frame2.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
 	static String name = ""; // for whenever the Runner needs to reference the character's name
@@ -33,7 +33,7 @@ public class Runner {
 		do {
 			//frame.updatePlayer(you); // tells the frame where the player is
 			frame2.updatePlayer(you);
-			you.getMap(frame2.map);
+			you.getRoom(frame2);
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
 			//System.out.println(frame);
 
@@ -194,12 +194,6 @@ public class Runner {
 			print("What race would you like to be? Your choices are human or orc.");
 			String race = reader.nextLine(); // asks the player what race he/she would like their character to be
 			you = new Player(race);
-			/*while (you.HP <= 0) { // checks if the race has been set yet, and if it hasn't it asks for another answer
-				print("That is not an answer. What race would you like to be?");
-				race = reader.nextLine();
-				you = new Player(race);
-
-			}*/
 
 			line();
 			opening(); // prints a message with all of the symbols of the dungeon and what they represent
@@ -292,23 +286,7 @@ public class Runner {
 	 * This method checks if there is a chest 1 space away in any of the 4 directions, then gives the player the contents of the chest
 	 */
 	static void open() {
-		/*for (int i = 0; i < Chests.length ; i++) {
-			if ((Chests[i].pos.x - you.pos.x == -1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the left
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.x - you.pos.x == 1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the right
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.y - you.pos.y == -1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space up
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.y - you.pos.y == 1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space down
-				Chests[i].open(); // runs the open() method on the chest that was found
-			}
-
-			if (Chests[i].open) { // if the chest is open, give the player the contents
-				you.get(Chests[i].contents);
-				print("you got a " + Chests[i].contents.name + "!");
-				line();
-			}
-		}*/
+		you.open();
 	}
 
 	/**

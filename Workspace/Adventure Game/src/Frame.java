@@ -1,5 +1,5 @@
 /**
- * This class is a placeholder class while I'm switching between the small Room and big Frame classes
+ * This class will hold the data of every room given to it, putting it all in one big frame.
  * @author Dr. Cheese
  */
 public class Frame {
@@ -11,7 +11,12 @@ public class Frame {
 	String orientation;
 
 	Frame(Room[] rooms) {
-
+		width = 0;
+		height = 0;
+		for (int i = 0; i < rooms.length; i++) {
+			width += rooms[i].width;
+			height += rooms[i].height;
+		}
 	}
 
 	/**

@@ -9,7 +9,7 @@ public class Player {
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
 	public Tile space = new Tile("player");
-	public Tile[][] map = {};
+	private Room room;
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
@@ -154,23 +154,53 @@ public class Player {
 	
 	public void open() {
 		Tile[] tiles = getDirections();
+		boolean chestThere = false;
+		int direction = 0;
 		for (int i = 0; i < tiles.length; i++) {
 			if (tiles[i].type.equals("closed chest")) {
+				chestThere = true;
+				direction = i;
+			}
+		}
+		
+		if (chestThere) {
+			for (int i = 0; i < room.Chests.length; i++) {
+				if (direction == 0) {
+					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
+						room.Chests[i].open();
+					}
+				} else if (direction == 1) {
+					if (room.Chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
+						room.Chests[i].open();
+					}
+				} else if (direction == 2) {
+					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
+						room.Chests[i].open();
+					}
+				} else if (direction == 3) {
+					if (room.Chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
+						room.Chests[i].open();
+					}
+				}
 				
+				if (room.Chests[i].open) {
+					get(room.Chests[i].contents);
+					System.out.println("you got a " + room.Chests[i].contents.name + "!");
+				}
 			}
 		}
 	}
-
-	public void getMap(Tile[][] map) {
-		this.map = map;
+	
+	public void getRoom(Room room) {
+		this.room = room;
 	}
 	
 	private Tile[] getDirections() {
 		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
-		tileList.add(map[pos.x][pos.y-1]); // up
-		tileList.add(map[pos.x+1][pos.y]); // right
-		tileList.add(map[pos.x][pos.y+1]); // down
-		tileList.add(map[pos.x-1][pos.y]); // left
+		tileList.add(room.map[pos.x][pos.y-1]); // up
+		tileList.add(room.map[pos.x+1][pos.y]); // right
+		tileList.add(room.map[pos.x][pos.y+1]); // down
+		tileList.add(room.map[pos.x-1][pos.y]); // left
 		Tile[] Directions = new Tile[tileList.size()];
 		tileList.toArray(Directions);
 		return Directions;

@@ -5,7 +5,6 @@
 public class Room extends Compiler {
 	int width;
 	int height;
-	public Chest[] Chests = super.Chests;
 
 	Player player = new Player();
 
@@ -24,7 +23,6 @@ public class Room extends Compiler {
 		super(width+2, height+2, player);
 		this.width = width+2;
 		this.height = height+2;
-		System.out.println("height: " + this.height);
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
 
@@ -58,5 +56,13 @@ public class Room extends Compiler {
 
 	public Tile getTile(Position tilePos) {
 		return map[tilePos.x][tilePos.y];
+	}
+	
+	public Tile[][] getMap() {
+		return map;
+	}
+	
+	public Chest[] getChests() {
+		return Chests;
 	}
 }
