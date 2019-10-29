@@ -44,6 +44,7 @@ public class Player {
 		raceSet(); // once the race is considered legal, the constructor sets up the base stats
 
 		equip(inventory[0]); // equips the starting weapon
+		dmgred = def;
 	}
 
 	/**
@@ -145,28 +146,49 @@ public class Player {
 		} else if (direction.equals("left")) {
 			newPos = new Position(pos.x-spaces, pos.y);
 		}
-		
+
 		if (legalMoveCheck(direction) == true) {
 			pos = newPos;
 		}
 	}
 	
+	public void open() {
+		Tile[] tiles = getDirections();
+		for (int i = 0; i < tiles.length; i++) {
+			if (tiles[i].type.equals("closed chest")) {
+				
+			}
+		}
+	}
+
 	public void getMap(Tile[][] map) {
 		this.map = map;
 	}
 	
+	private Tile[] getDirections() {
+		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
+		tileList.add(map[pos.y-1][pos.x]); // up
+		tileList.add(map[pos.y][pos.x+1]); // right
+		tileList.add(map[pos.y+1][pos.x]); // down
+		tileList.add(map[pos.y][pos.x-1]); // left
+		Tile[] Directions = new Tile[tileList.size()];
+		tileList.toArray(Directions);
+		return Directions;
+	}
+
 	private boolean legalMoveCheck(String direction) {
 		String tileType = "";
+		Tile[] tiles = getDirections();
 		if (direction.equals("up")) {
-			tileType = map[pos.y-1][pos.x].type;
+			tileType = tiles[0].type;
 		} else if (direction.equals("right")) {
-			tileType = map[pos.y][pos.x+1].type;
+			tileType = tiles[1].type;
 		} else if (direction.equals("down")) {
-			tileType = map[pos.y+1][pos.x].type;
+			tileType = tiles[2].type;
 		} else if (direction.equals("left")) {
-			tileType = map[pos.y][pos.x-1].type;
+			tileType = tiles[3].type;
 		}
-		
+
 		if (tileType.equals("empty") || tileType.equals("horizontal door") || tileType.equals("vertical door")) {
 			return true;
 		}
@@ -219,17 +241,15 @@ public class Player {
 	 * This toString() method prints out the stats of the character.
 	 */
 	public String toString() {
-		String s = "";
-		if (gearset && !gear.dmgBoost) { // if the player has set gear and it increases dmg
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + " + " + gear.name
-					+")\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else if (gearset) { // if the player has set gear, but it increases defense
-s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-		+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
-	} else { // if the player has no gear set
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-					+ def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
+		String s = "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name;
+		if (gearset && gear.dmgBoost) { // if the player has set gear and it increases dmg
+			s += " + " + gear.name;
 		}
+		s += ")\n  Defense: " + dmgred;
+		if (gearset && !gear.dmgBoost) {
+			s += " (base: " + def + " + " + gear.name + ")"; 
+		}
+		s += "\n  HP: " + HP + "\n  Movement Speed: " + spd;
 		return s;
 	}
 }

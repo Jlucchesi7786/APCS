@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * This class takes all of the random tiles and characters lying around the dungeon and organizes them into one two-stage array, called map[][].
+ * @author Dr. Cheese
+ */
 public class Compiler {
 	public Chest[] Chests = {new Chest(new Position(1, 30)), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
 	public Tile[][] map = {};
@@ -21,6 +25,12 @@ public class Compiler {
 		this(32, 32, new Player());
 	}
 
+	/**
+	 * This is where all the magic happens. This makes two array lists, one to 
+	 * store each row of tiles, then another to store all of the tiles
+	 * in each row. Combined with for loops, they store the identities of 
+	 * every tile on a map of a given size provided by the constructor.
+	 */
 	public void compileTiles() {
 		ArrayList<Tile[]> mapList = new ArrayList<Tile[]>();
 		for (int y = 0; y < height; y++) {
@@ -77,6 +87,11 @@ public class Compiler {
 		mapList.toArray(map);
 	}
 
+	/**
+	 * this updates the x and y of the player on the map[][] array, then 
+	 * recompiles the tiles to show the player's new position.
+	 * @param player (Player type)
+	 */
 	public void update(Player player) {
 		this.player = player;
 		compileTiles();

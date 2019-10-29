@@ -3,9 +3,9 @@
  * @author Dr. Cheese
  */
 public class Room extends Compiler {
-	// MAKE THE CLASS TAKE IN SMALLER ONES TO UPDATE THE FRAME
 	int width;
 	int height;
+	public Chest[] Chests = super.Chests;
 
 	Player player = new Player();
 
@@ -24,6 +24,7 @@ public class Room extends Compiler {
 		super(width+2, height+2, player);
 		this.width = width+2;
 		this.height = height+2;
+		System.out.println("height: " + this.height);
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
 
@@ -32,10 +33,12 @@ public class Room extends Compiler {
 	 */
 	public String toString() {
 		String s = "";
-		for (int x = 0; x < height; x++) {
-			for (int y = 0; y < width; y++) {
-				s += map[x][y].character + " ";
-				if (y == width-1) {
+		
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				s += map[y][x].character + " ";
+				
+				if (x == width-1) {
 					s += "\n";
 				}
 			}

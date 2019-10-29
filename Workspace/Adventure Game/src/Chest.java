@@ -36,4 +36,15 @@ public class Chest extends Item {
 		open = true;
 		space.update("open chest");
 	}
+	
+	public String toString() {
+		String s = "Position: " + pos + "\nState: ";
+		if (open) {
+			s += "open";
+		} else {
+			s += "closed";
+		}
+		
+		return s;
+	}
 }
