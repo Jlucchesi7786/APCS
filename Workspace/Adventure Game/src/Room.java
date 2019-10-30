@@ -9,10 +9,12 @@ public class Room extends Compiler {
 	String orientation;
 
 	/**
-	 * This constructor makes a room with width and height. The playable area is a square/rectangle in the middle, with the walls taking up one space on each side
-	 * @param width int
-	 * @param height int
-	 * @param orientation String
+	 * This constructor makes a room with some given width and some given height. 
+	 * The playable area is a square/rectangle in the middle, with the walls 
+	 * taking up one space on each side.
+	 * @param width What width the playable area should be at base (int).
+	 * @param height What height the playable area should be at base (int).
+	 * @param orientation Still not sure what to do with this.
 	 */
 	Room(int width, int height, String orientation, Player player) {
 		super(width+2, height+2, player);
@@ -20,7 +22,7 @@ public class Room extends Compiler {
 		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
-	
+
 	Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
 		super(width+2, height+2, player, chests, walls, doors);
 		this.width = width+2;
@@ -29,20 +31,78 @@ public class Room extends Compiler {
 	}
 
 	/**
-	 * This toString() method constructs a string with all of the symbols and the empty space in the frame
+	 * This toString() method constructs a string with all of the symbols and 
+	 * the empty space in the frame.
 	 */
 	public String toString() {
 		String s = "";
-		
+
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				s += map[x][y].character + " ";
-				
+
 				if (x == width-1) {
 					s += "\n";
 				}
 			}
 		}
+
+		return s;
+	}
+
+	/**
+	 * This method "compresses" the room's stored arrays (chests[], walls[], etc.) down 
+	 * to one string then returns it. I'm not sure if it will be useful, but that's what
+	 * we're going with right now.
+	 * @return The compressed room in String format.
+	 */
+	public String compress() {
+		String s = "";
+		s += "[width: " + this.width + ", height: " + this.height + "], [chests: ";
+		for (int i = 0; i < chests.length; i++) {
+			s += "(state: ";
+			if (chests[i].open == true) {
+				s += "open";
+			} else {
+				s += "closed";
+			}
+			s += "; position: " + chests[i].pos + "; contents: " + chests[i].contents.name
+					+ ")";
+			if (i < chests.length - 1) {
+				s += " | ";
+			}
+		}
+		
+		s += "], [walls: ";
+		for (int i = 0; i < walls.length; i++) {
+			s += "(starting position: " + walls[i].startPos + "; length: "
+					+ walls[i].length + "; orientation: ";
+			if (walls[i].horizontal == true) {
+				s += "horizontal";
+			} else {
+				s += "vertical";
+			}
+			s += ")";
+			if (i < walls.length - 1) {
+				s += " | ";
+			}
+		}
+		
+		s += "], [doors: ";
+		for (int i = 0; i < doors.length; i++) {
+			s += "(position: " + doors[i].pos + "; orientation: " + doors[i].orientation
+					+ "; state: ";
+			if (doors[i].locked == true) {
+				s += "locked";
+			} else {
+				s += "unlocked";
+			}
+			s += ")";
+			if (i < doors.length - 1) {
+				s += " | ";
+			}
+		}
+		s += "]";
 
 		return s;
 	}

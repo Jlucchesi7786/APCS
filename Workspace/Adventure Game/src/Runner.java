@@ -33,6 +33,7 @@ public class Runner {
 		do {
 			//frame.updatePlayer(you); // tells the frame where the player is
 			frame2.update(you);
+			System.out.println(frame2.compress());
 			you.getRoom(frame2);
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
 			//System.out.println(frame);

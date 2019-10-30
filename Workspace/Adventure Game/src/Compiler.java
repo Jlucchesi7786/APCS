@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Compiler {
 	private Chest[] defaultChests = {new Chest(new Position(1, 30)), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
-	public Chest[] Chests;
+	public Chest[] chests;
 	public Tile[][] map;
 	private Wall[] defaultWalls = {new Wall("vertical", 30, 6, 1), new Wall("horizontal", 5, 1, 4), new Wall("horizontal", 25, 6, 14), new Wall("vertical", 30, 25, 1)};
 	public Wall[] walls;
@@ -21,7 +21,7 @@ public class Compiler {
 		this.width = width;
 		this.height = height;
 		this.player = player;
-		this.Chests = defaultChests;
+		this.chests = defaultChests;
 		this.walls = defaultWalls;
 		this.doors = defaultDoors;
 		compileTiles();
@@ -35,7 +35,7 @@ public class Compiler {
 	public Compiler(int width, int height, Chest[] chests, Wall[] walls, Door[] doors) {
 		this.width = width;
 		this.height = height;
-		this.Chests = chests;
+		this.chests = chests;
 		this.walls = walls;
 		this.doors = doors;
 		compileTiles();
@@ -66,9 +66,9 @@ public class Compiler {
 					} else {
 						boolean added = false;
 
-						for (int c = 0; c < Chests.length; c++) {
-							if (Chests[c].pos.equals(gridPos)) {
-								rowList.add(Chests[c].space);
+						for (int c = 0; c < chests.length; c++) {
+							if (chests[c].pos.equals(gridPos)) {
+								rowList.add(chests[c].space);
 								added = true;
 							}
 						}
@@ -126,6 +126,6 @@ public class Compiler {
 	}
 	
 	public Chest[] getChests() {
-		return Chests;
+		return chests;
 	}
 }

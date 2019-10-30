@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * This class holds a bunch of the information about the character
+ * This class holds a bunch of the information about the character.
  * @author Dr. Cheese
  */
 public class Player {
@@ -164,30 +164,30 @@ public class Player {
 		}
 		
 		if (chestThere) {
-			for (int i = 0; i < room.Chests.length; i++) {
+			for (int i = 0; i < room.chests.length; i++) {
 				if (direction == 0) {
-					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
-						room.Chests[i].open();
-						get(room.Chests[i].contents);
-						System.out.println("you got a " + room.Chests[i].contents.name + "!");
+					if (room.chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
 					}
 				} else if (direction == 1) {
-					if (room.Chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
-						room.Chests[i].open();
-						get(room.Chests[i].contents);
-						System.out.println("you got a " + room.Chests[i].contents.name + "!");
+					if (room.chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
 					}
 				} else if (direction == 2) {
-					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
-						room.Chests[i].open();
-						get(room.Chests[i].contents);
-						System.out.println("you got a " + room.Chests[i].contents.name + "!");
+					if (room.chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
 					}
 				} else if (direction == 3) {
-					if (room.Chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
-						room.Chests[i].open();
-						get(room.Chests[i].contents);
-						System.out.println("you got a " + room.Chests[i].contents.name + "!");
+					if (room.chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
 					}
 				}
 			}
