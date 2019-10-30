@@ -25,8 +25,8 @@ public class Room extends Compiler {
 
 	Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
 		super(width+2, height+2, player, chests, walls, doors);
-		this.width = width+2;
-		this.height = height+2;
+		//this.width = width+2;
+		//this.height = height+2;
 		this.orientation = orientation;
 	}
 
@@ -58,47 +58,47 @@ public class Room extends Compiler {
 	 */
 	public String compress() {
 		String s = "";
-		s += "[width: " + this.width + ", height: " + this.height + "], [chests: ";
-		for (int i = 0; i < chests.length; i++) {
+		s += "[width: " + this.width + ", height: " + this.height + "]*[chests: ";
+		for (int i = 0; i < getChests().length; i++) {
 			s += "(state: ";
-			if (chests[i].open == true) {
+			if (getChests()[i].open == true) {
 				s += "open";
 			} else {
 				s += "closed";
 			}
-			s += "; position: " + chests[i].pos + "; contents: " + chests[i].contents.name
+			s += "; position: " + getChests()[i].pos + "; contents: " + getChests()[i].contents.name
 					+ ")";
-			if (i < chests.length - 1) {
+			if (i < getChests().length - 1) {
 				s += " | ";
 			}
 		}
 		
-		s += "], [walls: ";
-		for (int i = 0; i < walls.length; i++) {
-			s += "(starting position: " + walls[i].startPos + "; length: "
-					+ walls[i].length + "; orientation: ";
-			if (walls[i].horizontal == true) {
+		s += "]*[walls: ";
+		for (int i = 0; i < getWalls().length; i++) {
+			s += "(starting position: " + getWalls()[i].startPos + "; length: "
+					+ getWalls()[i].length + "; orientation: ";
+			if (getWalls()[i].horizontal == true) {
 				s += "horizontal";
 			} else {
 				s += "vertical";
 			}
 			s += ")";
-			if (i < walls.length - 1) {
+			if (i < getWalls().length - 1) {
 				s += " | ";
 			}
 		}
 		
-		s += "], [doors: ";
-		for (int i = 0; i < doors.length; i++) {
-			s += "(position: " + doors[i].pos + "; orientation: " + doors[i].orientation
+		s += "]*[doors: ";
+		for (int i = 0; i < getDoors().length; i++) {
+			s += "(position: " + getDoors()[i].pos + "; orientation: " + getDoors()[i].orientation
 					+ "; state: ";
-			if (doors[i].locked == true) {
+			if (getDoors()[i].locked == true) {
 				s += "locked";
 			} else {
 				s += "unlocked";
 			}
 			s += ")";
-			if (i < doors.length - 1) {
+			if (i < getDoors().length - 1) {
 				s += " | ";
 			}
 		}

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 /**
  * This runs the whole program using some while loops.
  * @author Dr. Cheese
@@ -6,7 +7,7 @@ import java.util.Scanner;
  */
 public class Runner {
 	static Room frame2;
-	//static Frame frame = new Frame(32, 32, "down"); // Creates the room that the game works in
+	static Frame frame; // Creates the room that the game works in
 	//static Chest[] Chests = frame2.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
@@ -33,7 +34,6 @@ public class Runner {
 		do {
 			//frame.updatePlayer(you); // tells the frame where the player is
 			frame2.update(you);
-			System.out.println(frame2.compress());
 			you.getRoom(frame2);
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
 			//System.out.println(frame);
@@ -216,6 +216,8 @@ public class Runner {
 			running = true;
 		}
 		frame2 = new Room(30, 30, "down", you);
+		Room[] rooms = {frame2, frame2};
+		frame = new Frame(rooms);
 	}
 
 	/**

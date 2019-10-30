@@ -164,30 +164,30 @@ public class Player {
 		}
 		
 		if (chestThere) {
-			for (int i = 0; i < room.chests.length; i++) {
+			for (int i = 0; i < room.getChests().length; i++) {
 				if (direction == 0) {
-					if (room.chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
-						room.chests[i].open();
-						get(room.chests[i].contents);
-						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					if (room.getChests()[i].pos.equals(new Position(pos.x, pos.y-1))) {
+						room.getChests()[i].open();
+						get(room.getChests()[i].contents);
+						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
 					}
 				} else if (direction == 1) {
-					if (room.chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
-						room.chests[i].open();
-						get(room.chests[i].contents);
-						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					if (room.getChests()[i].pos.equals(new Position(pos.x+1, pos.y))) {
+						room.getChests()[i].open();
+						get(room.getChests()[i].contents);
+						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
 					}
 				} else if (direction == 2) {
-					if (room.chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
-						room.chests[i].open();
-						get(room.chests[i].contents);
-						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					if (room.getChests()[i].pos.equals(new Position(pos.x, pos.y+1))) {
+						room.getChests()[i].open();
+						get(room.getChests()[i].contents);
+						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
 					}
 				} else if (direction == 3) {
-					if (room.chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
-						room.chests[i].open();
-						get(room.chests[i].contents);
-						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					if (room.getChests()[i].pos.equals(new Position(pos.x-1, pos.y))) {
+						room.getChests()[i].open();
+						get(room.getChests()[i].contents);
+						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
 					}
 				}
 			}

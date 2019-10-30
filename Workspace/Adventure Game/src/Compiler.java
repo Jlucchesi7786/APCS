@@ -6,16 +6,17 @@ import java.util.*;
  */
 public class Compiler {
 	private Chest[] defaultChests = {new Chest(new Position(1, 30)), new Chest(30, 19), new Chest(1, 1), new Chest(30, 2), new Chest(5, 5), new Chest(26, 15)};
-	public Chest[] chests;
-	public Tile[][] map;
+	private Chest[] chests;
 	private Wall[] defaultWalls = {new Wall("vertical", 30, 6, 1), new Wall("horizontal", 5, 1, 4), new Wall("horizontal", 25, 6, 14), new Wall("vertical", 30, 25, 1)};
-	public Wall[] walls;
+	private Wall[] walls;
 	private Door[] defaultDoors = {new Door(new Position(6, 2), "unlocked", "vertical"), new Door(new Position(25, 10), "unlocked", "vertical"), new Door(new Position(2, 4), "unlocked", "horizontal")};
-	public Door[] doors;
-	public Player player;
+	private Door[] doors;
+	private Player player;
 
 	private int width;
 	private int height;
+
+	public Tile[][] map;
 
 	public Compiler(int width, int height, Player player) {
 		this.width = width;
@@ -127,5 +128,13 @@ public class Compiler {
 	
 	public Chest[] getChests() {
 		return chests;
+	}
+	
+	public Wall[] getWalls() {
+		return walls;
+	}
+	
+	public Door[] getDoors() {
+		return doors;
 	}
 }
