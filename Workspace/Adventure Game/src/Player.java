@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * This class holds a bunch of the information about the character
+ * This class holds a bunch of the information about the character.
  * @author Dr. Cheese
  */
 public class Player {
@@ -9,7 +9,7 @@ public class Player {
 
 	private Scanner reader = new Scanner(System.in); //lets the player set a new race if the old one doesn't work
 	public Tile space = new Tile("player");
-	public Tile[][] map = {};
+	private Room room;
 
 	public int str; // holds the base damage the character would do, without any modifiers
 	private int strmod = 0; // holds all of the bonuses to damage that the character has from their equipment
@@ -38,12 +38,13 @@ public class Player {
 	 * @param race String
 	 */
 	Player(String race) {
-		pos = new Position(30, 1);
+		pos = new Position(1, 2);
 
 		legalRaceCheck(race); // checks if the race the player wants to be is defined
 		raceSet(); // once the race is considered legal, the constructor sets up the base stats
 
 		equip(inventory[0]); // equips the starting weapon
+		dmgred = def;
 	}
 
 	/**
@@ -145,28 +146,86 @@ public class Player {
 		} else if (direction.equals("left")) {
 			newPos = new Position(pos.x-spaces, pos.y);
 		}
-		
+
 		if (legalMoveCheck(direction) == true) {
 			pos = newPos;
 		}
 	}
 	
-	public void getMap(Tile[][] map) {
-		this.map = map;
-	}
-	
-	private boolean legalMoveCheck(String direction) {
-		String tileType = "";
-		if (direction.equals("up")) {
-			tileType = map[pos.y-1][pos.x].type;
-		} else if (direction.equals("right")) {
-			tileType = map[pos.y][pos.x+1].type;
-		} else if (direction.equals("down")) {
-			tileType = map[pos.y+1][pos.x].type;
-		} else if (direction.equals("left")) {
-			tileType = map[pos.y][pos.x-1].type;
+	public void open() {
+		Tile[] tiles = getDirections();
+		boolean chestThere = false;
+		int direction = 0;
+		for (int i = 0; i < tiles.length; i++) {
+			if (tiles[i].type.equals("closed chest")) {
+				chestThere = true;
+				direction = i;
+			}
 		}
 		
+		if (chestThere) {
+			for (int i = 0; i < room.chests.length; i++) {
+				if (direction == 0) {
+					if (room.chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					}
+				} else if (direction == 1) {
+					if (room.chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					}
+				} else if (direction == 2) {
+					if (room.chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					}
+				} else if (direction == 3) {
+					if (room.chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
+						room.chests[i].open();
+						get(room.chests[i].contents);
+						System.out.println("you got a " + room.chests[i].contents.name + "!");
+					}
+				}
+			}
+		}
+	}
+	
+	public void getRoom(Room room) {
+		this.room = room;
+	}
+	
+	private Tile[] getDirections() {
+		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
+		tileList.add(room.map[pos.x][pos.y-1]); // up
+		//System.out.println("up: " + room.map[pos.x][pos.y-1].type);
+		tileList.add(room.map[pos.x+1][pos.y]); // right
+		//System.out.println("right: " + room.map[pos.x+1][pos.y].type);
+		tileList.add(room.map[pos.x][pos.y+1]); // down
+		//System.out.println("down: " + room.map[pos.x][pos.y+1].type);
+		tileList.add(room.map[pos.x-1][pos.y]); // left
+		//System.out.println("left: " + room.map[pos.x-1][pos.y].type);
+		Tile[] Directions = new Tile[tileList.size()];
+		tileList.toArray(Directions);
+		return Directions;
+	}
+
+	private boolean legalMoveCheck(String direction) {
+		String tileType = "";
+		Tile[] tiles = getDirections();
+		if (direction.equals("up")) {
+			tileType = tiles[0].type;
+		} else if (direction.equals("right")) {
+			tileType = tiles[1].type;
+		} else if (direction.equals("down")) {
+			tileType = tiles[2].type;
+		} else if (direction.equals("left")) {
+			tileType = tiles[3].type;
+		}
+
 		if (tileType.equals("empty") || tileType.equals("horizontal door") || tileType.equals("vertical door")) {
 			return true;
 		}
@@ -219,17 +278,15 @@ public class Player {
 	 * This toString() method prints out the stats of the character.
 	 */
 	public String toString() {
-		String s = "";
-		if (gearset && !gear.dmgBoost) { // if the player has set gear and it increases dmg
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + " + " + gear.name
-					+")\n  Defense: " + def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
-		} else if (gearset) { // if the player has set gear, but it increases defense
-s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-		+ dmgred + " (base: " + def + " + " + gear.name + ")\n  HP: " + HP + "\n  Movement Speed: " + spd;
-	} else { // if the player has no gear set
-			s += "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name + ")\n  Defense: "
-					+ def + "\n  HP: " + HP + "\n  Movement Speed: " + spd;
+		String s = "Your stats: \n  Strength: " + dmg + " (base: " + str + " + " + weapon.name;
+		if (gearset && gear.dmgBoost) { // if the player has set gear and it increases dmg
+			s += " + " + gear.name;
 		}
+		s += ")\n  Defense: " + dmgred;
+		if (gearset && !gear.dmgBoost) {
+			s += " (base: " + def + " + " + gear.name + ")"; 
+		}
+		s += "\n  HP: " + HP + "\n  Movement Speed: " + spd;
 		return s;
 	}
 }

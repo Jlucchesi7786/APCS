@@ -6,8 +6,8 @@ import java.util.Scanner;
  */
 public class Runner {
 	static Room frame2;
-	static Frame frame = new Frame(32, 32, "down"); // Creates the room that the game works in
-	static Chest[] Chests = frame.Chests; // takes the Chests[] array from the frame and lets it be used in Runner
+	//static Frame frame = new Frame(32, 32, "down"); // Creates the room that the game works in
+	//static Chest[] Chests = frame2.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
 	static String name = ""; // for whenever the Runner needs to reference the character's name
@@ -23,7 +23,7 @@ public class Runner {
 
 	static String action = ""; // used to keep track of what the player has entered for the character to do
 	static String[] actions = {"move", "open", "attack", "help", "help2", "inventory",
-		"check inventory", "weapon", "check weapon", "gear", "check gear", "wait", "stats", "die"}; // keeps track of all of the acceptable actions
+		"check inventory", "weapon", "check weapon", "gear", "check gear", "wait", "stats", "die", "show frame"}; // keeps track of all of the acceptable actions
 
 	static boolean inventHelp = true; // keeps track of whether the player has seen the inventory help message or not
 
@@ -31,9 +31,10 @@ public class Runner {
 		startup(); // runs the startup method created below
 
 		do {
-			frame.updatePlayer(you); // tells the frame where the player is
-			frame2.updatePlayer(you);
-			you.getMap(frame2.map);
+			//frame.updatePlayer(you); // tells the frame where the player is
+			frame2.update(you);
+			System.out.println(frame2.compress());
+			you.getRoom(frame2);
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
 			//System.out.println(frame);
 
@@ -79,6 +80,9 @@ public class Runner {
 				help(); // prints the first help message, describing all of the possible actions
 			} else if (action.equals("help2")) {
 				opening(); // prints the second help message, describing all of the symbols and what they represent
+			} else if (action.equals("show frame")) {
+				line();
+				System.out.println(frame2); // prints out the frame again
 			} else if (action.equals("stats")) {
 				stats(); // prints out the character's current stats
 			} else if (action.equals("check inventory") || action.equals("inventory")) {
@@ -194,12 +198,6 @@ public class Runner {
 			print("What race would you like to be? Your choices are human or orc.");
 			String race = reader.nextLine(); // asks the player what race he/she would like their character to be
 			you = new Player(race);
-			/*while (you.HP <= 0) { // checks if the race has been set yet, and if it hasn't it asks for another answer
-				print("That is not an answer. What race would you like to be?");
-				race = reader.nextLine();
-				you = new Player(race);
-
-			}*/
 
 			line();
 			opening(); // prints a message with all of the symbols of the dungeon and what they represent
@@ -244,6 +242,7 @@ public class Runner {
 				+ "\n     one item at a time) \n";
 		s += " - \'weapon\' or \'check weapon\' (lets you check what your currently equipped weapon is) \n";
 		s += " - \'gear\' or \'gear\' (lets you check what your currently equipped gear is) \n";
+		s += " - \'show frame\' (prints out the current frame again, so you don't have to scroll up to see the map) \n";
 		s += "Make sure you give all your commands in lowercase! Enter help2 to see a list of all of the symbols and \n";
 		s += "what they mean."; // also directs the player to the help2 command if they need to see the list of symbols again
 		print(s);
@@ -292,23 +291,7 @@ public class Runner {
 	 * This method checks if there is a chest 1 space away in any of the 4 directions, then gives the player the contents of the chest
 	 */
 	static void open() {
-		for (int i = 0; i < Chests.length ; i++) {
-			if ((Chests[i].pos.x - you.pos.x == -1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the left
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.x - you.pos.x == 1) && (Chests[i].pos.y == you.pos.y)) { // checks if there is a chest 1 space to the right
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.y - you.pos.y == -1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space up
-				Chests[i].open(); // runs the open() method on the chest that was found
-			} else if ((Chests[i].pos.y - you.pos.y == 1) && (Chests[i].pos.x == you.pos.x)) { // checks if there is a chest 1 space down
-				Chests[i].open(); // runs the open() method on the chest that was found
-			}
-
-			if (Chests[i].open) { // if the chest is open, give the player the contents
-				you.get(Chests[i].contents);
-				print("you got a " + Chests[i].contents.name + "!");
-				line();
-			}
-		}
+		you.open();
 	}
 
 	/**

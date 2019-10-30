@@ -2,7 +2,7 @@
  * This class holds some basic information about the chests lying around the dungeon.
  * @author Dr. Cheese
  */
-public class Chest extends Item {
+public class Chest {
 	public Position pos;
 
 	boolean open; // holds the state of the chest
@@ -35,5 +35,16 @@ public class Chest extends Item {
 	public void open() {
 		open = true;
 		space.update("open chest");
+	}
+	
+	public String toString() {
+		String s = "Position: " + pos + "\nState: ";
+		if (open) {
+			s += "open";
+		} else {
+			s += "closed";
+		}
+		
+		return s;
 	}
 }
