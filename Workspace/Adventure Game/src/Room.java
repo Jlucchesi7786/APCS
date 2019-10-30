@@ -6,11 +6,6 @@ public class Room extends Compiler {
 	int width;
 	int height;
 
-	Player player = new Player();
-
-	boolean checked = false;
-	boolean opened = false;
-
 	String orientation;
 
 	/**
@@ -24,6 +19,13 @@ public class Room extends Compiler {
 		this.width = width+2;
 		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
+	}
+	
+	Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
+		super(width+2, height+2, player, chests, walls, doors);
+		this.width = width+2;
+		this.height = height+2;
+		this.orientation = orientation;
 	}
 
 	/**
@@ -43,26 +45,5 @@ public class Room extends Compiler {
 		}
 
 		return s;
-	}
-
-	/**
-	 * This method takes in a Player object to update where the character is to display it properly.
-	 * @param player Player object
-	 */
-	public void updatePlayer(Player player) {
-		super.update(player);
-		this.player = player;
-	}
-
-	public Tile getTile(Position tilePos) {
-		return map[tilePos.x][tilePos.y];
-	}
-	
-	public Tile[][] getMap() {
-		return map;
-	}
-	
-	public Chest[] getChests() {
-		return Chests;
 	}
 }

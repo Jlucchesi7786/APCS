@@ -23,7 +23,7 @@ public class Runner {
 
 	static String action = ""; // used to keep track of what the player has entered for the character to do
 	static String[] actions = {"move", "open", "attack", "help", "help2", "inventory",
-		"check inventory", "weapon", "check weapon", "gear", "check gear", "wait", "stats", "die"}; // keeps track of all of the acceptable actions
+		"check inventory", "weapon", "check weapon", "gear", "check gear", "wait", "stats", "die", "show frame"}; // keeps track of all of the acceptable actions
 
 	static boolean inventHelp = true; // keeps track of whether the player has seen the inventory help message or not
 
@@ -32,7 +32,7 @@ public class Runner {
 
 		do {
 			//frame.updatePlayer(you); // tells the frame where the player is
-			frame2.updatePlayer(you);
+			frame2.update(you);
 			you.getRoom(frame2);
 			System.out.println(frame2); // prints the frame, letting the player know what's going on
 			//System.out.println(frame);
@@ -79,6 +79,9 @@ public class Runner {
 				help(); // prints the first help message, describing all of the possible actions
 			} else if (action.equals("help2")) {
 				opening(); // prints the second help message, describing all of the symbols and what they represent
+			} else if (action.equals("show frame")) {
+				line();
+				System.out.println(frame2); // prints out the frame again
 			} else if (action.equals("stats")) {
 				stats(); // prints out the character's current stats
 			} else if (action.equals("check inventory") || action.equals("inventory")) {
@@ -238,6 +241,7 @@ public class Runner {
 				+ "\n     one item at a time) \n";
 		s += " - \'weapon\' or \'check weapon\' (lets you check what your currently equipped weapon is) \n";
 		s += " - \'gear\' or \'gear\' (lets you check what your currently equipped gear is) \n";
+		s += " - \'show frame\' (prints out the current frame again, so you don't have to scroll up to see the map) \n";
 		s += "Make sure you give all your commands in lowercase! Enter help2 to see a list of all of the symbols and \n";
 		s += "what they mean."; // also directs the player to the help2 command if they need to see the list of symbols again
 		print(s);

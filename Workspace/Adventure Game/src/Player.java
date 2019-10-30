@@ -38,7 +38,7 @@ public class Player {
 	 * @param race String
 	 */
 	Player(String race) {
-		pos = new Position(30, 1);
+		pos = new Position(1, 2);
 
 		legalRaceCheck(race); // checks if the race the player wants to be is defined
 		raceSet(); // once the race is considered legal, the constructor sets up the base stats
@@ -168,24 +168,27 @@ public class Player {
 				if (direction == 0) {
 					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y-1))) {
 						room.Chests[i].open();
+						get(room.Chests[i].contents);
+						System.out.println("you got a " + room.Chests[i].contents.name + "!");
 					}
 				} else if (direction == 1) {
 					if (room.Chests[i].pos.equals(new Position(pos.x+1, pos.y))) {
 						room.Chests[i].open();
+						get(room.Chests[i].contents);
+						System.out.println("you got a " + room.Chests[i].contents.name + "!");
 					}
 				} else if (direction == 2) {
 					if (room.Chests[i].pos.equals(new Position(pos.x, pos.y+1))) {
 						room.Chests[i].open();
+						get(room.Chests[i].contents);
+						System.out.println("you got a " + room.Chests[i].contents.name + "!");
 					}
 				} else if (direction == 3) {
 					if (room.Chests[i].pos.equals(new Position(pos.x-1, pos.y))) {
 						room.Chests[i].open();
+						get(room.Chests[i].contents);
+						System.out.println("you got a " + room.Chests[i].contents.name + "!");
 					}
-				}
-				
-				if (room.Chests[i].open) {
-					get(room.Chests[i].contents);
-					System.out.println("you got a " + room.Chests[i].contents.name + "!");
 				}
 			}
 		}
@@ -198,9 +201,13 @@ public class Player {
 	private Tile[] getDirections() {
 		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
 		tileList.add(room.map[pos.x][pos.y-1]); // up
+		//System.out.println("up: " + room.map[pos.x][pos.y-1].type);
 		tileList.add(room.map[pos.x+1][pos.y]); // right
+		//System.out.println("right: " + room.map[pos.x+1][pos.y].type);
 		tileList.add(room.map[pos.x][pos.y+1]); // down
+		//System.out.println("down: " + room.map[pos.x][pos.y+1].type);
 		tileList.add(room.map[pos.x-1][pos.y]); // left
+		//System.out.println("left: " + room.map[pos.x-1][pos.y].type);
 		Tile[] Directions = new Tile[tileList.size()];
 		tileList.toArray(Directions);
 		return Directions;
