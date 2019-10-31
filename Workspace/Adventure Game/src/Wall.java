@@ -58,15 +58,8 @@ public class Wall {
 	}
 	
 	public boolean checkSpaces(int x, int y) {
-		for (int i = 0; i < length; i++) {
-			if (spaces[i].x == x && spaces[i].y == y) {
-				return true;
-			}
-		}
-		return false;
+		return checkSpaces(new Position(x, y));
 	}
-	
-
 	
 	public boolean checkSpaces(Position other) {
 		for (int i = 0; i < length; i++) {
@@ -75,5 +68,17 @@ public class Wall {
 			}
 		}
 		return false;
+	}
+	
+	public String toString() {
+		String s = "starting postion: " + startPos + ", length: " + length
+				+ ", orientation: ";
+		if (horizontal) {
+			s += "horizontal";
+		} else {
+			s += "vertical";
+		}
+		
+		return s;
 	}
 }
