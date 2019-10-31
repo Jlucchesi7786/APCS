@@ -5,6 +5,7 @@ public class FrameCompiler extends Compiler {
 	private Wall[] walls;
 	private Door[] doors;
 	private Player player;
+	private Room[] rooms;
 	
 	private int width;
 	private int height;
@@ -12,6 +13,7 @@ public class FrameCompiler extends Compiler {
 	public Tile[][] map;
 	
 	public FrameCompiler(Room[] rooms) {
+		this.rooms = rooms;
 		ArrayList<Chest> ChestsList = new ArrayList<Chest>();
 		ArrayList<Wall> WallsList = new ArrayList<Wall>();
 		ArrayList<Door> DoorsList = new ArrayList<Door>();
@@ -31,14 +33,12 @@ public class FrameCompiler extends Compiler {
 			}
 			width += rooms[i].width;
 			height += rooms[i].height;
+			//System.out.println(rooms[i].compress());
 		}
 		chests = new Chest[ChestsList.size()];
 		ChestsList.toArray(chests);
-		for (int i = 0; i < chests.length; i++) {
-			System.out.println(chests[i].space.type);
-		}
 		
-		walls = new Wall[ChestsList.size()];
+		walls = new Wall[WallsList.size()];
 		WallsList.toArray(walls);
 		
 		doors = new Door[DoorsList.size()];

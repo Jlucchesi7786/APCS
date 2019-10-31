@@ -19,7 +19,7 @@ public class Frame extends FrameCompiler {
 		for (int i = 0; i < rooms.length; i++) {
 			width += rooms[i].width;
 			height += rooms[i].height;
-			decompress(rooms[i].compress());
+			//decompress(rooms[i].compress());
 		}
 	}
 	

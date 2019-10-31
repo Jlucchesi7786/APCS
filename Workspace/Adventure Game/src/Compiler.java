@@ -61,7 +61,6 @@ public class Compiler {
 					rowList.add(new Tile("wall"));
 				} else {
 					Position gridPos = new Position(x, y);
-					//System.out.println(gridPos);
 					if (x == 0 || x == width-1) {
 						rowList.add(new Tile("wall"));
 					} else {

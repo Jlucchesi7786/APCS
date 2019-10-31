@@ -56,4 +56,14 @@ public class Door {
 			return "unlocked";
 		}
 	}
+	
+	public String toString() {
+		String s = "Position: " + pos + ", orientation: " + orientation + ", state: ";
+		if (locked) {
+			s += "locked";
+		} else {
+			s += "unlocked";
+		}
+		return s;
+	}
 }
