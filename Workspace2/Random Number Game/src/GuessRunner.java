@@ -10,9 +10,9 @@ public class GuessRunner {
 	
 	public static void main(String[] args) {
 		System.out.println("This is a guessing game. Would you like to choose a number, "
-				+ "or would you like to choose a number? \nEnter \"me\" for you to "
-				+ "decide what number it is, or enter \"comp\" to have the computer "
-				+ "choose \na number.");
+				+ "or would you like the computer to \nchoose a number? Enter "
+				+ "\"me\" for you to decide what number it is, or enter \"comp\" "
+				+ " to have the \ncomputer choose a number.");
 		boolean set = false;
 		do {
 			String response = reader.nextLine();
@@ -51,10 +51,18 @@ public class GuessRunner {
 		System.out.println("Enter the number you have chosen:");
 		playerval = new Value(reader.nextInt());
 		System.out.println("The computer will now guess the number. \n");
+		guess();
+		System.out.println("it guessed the number!");
+		System.out.println("it took the computer " + numguesses + " tries "
+				+ "to guess the number.");
+	}
+	
+	static void guess() {
 		int interval = 10;
 		String lastresponse = "";
 		do {
-			System.out.println("guess " + (numguesses+1) + ": " + compval);
+			numguesses++;
+			System.out.println("guess " + (numguesses) + ": " + compval);
 			lastresponse = response;
 			response = playerval.compare(compval);
 			if (response.equals("too small")) {
@@ -73,11 +81,8 @@ public class GuessRunner {
 					}
 				}
 			System.out.println("result: " + response + "\n");
-			numguesses++;
 		} while (!compval.equals(playerval));
-		System.out.println(compval);
-		System.out.println("it guessed the number!");
-		System.out.println("it took the computer " + numguesses + " tries "
-				+ "to guess the number.");
+		numguesses++;
+		System.out.println("guess " + numguesses + ": " + compval);
 	}
 }

@@ -42,6 +42,23 @@ public class Value {
 	}
 	
 	/**
+	 * This method compares the values of two Value instances and returns an integer based
+	 * on whether the first value is higher, lower, or the same.
+	 * @param other other Value instance to compare to.
+	 * @return positive 1 if the first instance is greater, negative 1 if the first 
+	 * instance is less, or 0 if they are equal to each other.
+	 */
+	public int compareTo(Value other) {
+		if (this.getValue() > other.getValue()) {
+			return 1;
+		} else if (this.getValue() < other.getValue()) {
+			return -1;
+		}
+		
+		return 0;
+	}
+	
+	/**
 	 * This method checks if this instance and another instance are storing the same value.
 	 * @param other other Value object to compare to.
 	 * @return true if the stored values are the same between the instances, or false
