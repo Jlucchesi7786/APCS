@@ -33,7 +33,7 @@ public class Value {
 		if (this.equals(other)) {
 			return "you guessed it!";
 		} else if (this.val < other.getValue()) {
-			return "Too big";
+			return "too big";
 		} else if (this.val > other.getValue()) {
 			return "too small";
 		}
