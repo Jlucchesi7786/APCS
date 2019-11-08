@@ -26,8 +26,8 @@ public class Value {
 	 * This method returns if one Value object is "too big", "too small", or equal to the 
 	 * instance running the class.
 	 * @param other other Value object to compare to.
-	 * @return the comparison statement between the two Values, with the instance running
-	 * the method being the reference frame for the two.
+	 * @return the resultant comparison statement between the two Values, with the instance
+	 * running the method being the reference frame for the two.
 	 */
 	public String compare(Value other) {
 		if (this.equals(other)) {
