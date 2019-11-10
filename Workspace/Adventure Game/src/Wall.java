@@ -61,6 +61,10 @@ public class Wall {
 		return checkSpaces(new Position(x, y));
 	}
 	
+	public Position[] getSpaces() {
+		return spaces;
+	}
+	
 	public boolean checkSpaces(Position other) {
 		for (int i = 0; i < length; i++) {
 			if (spaces[i].equals(other)) {
