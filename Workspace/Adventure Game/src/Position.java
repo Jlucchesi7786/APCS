@@ -57,6 +57,13 @@ public class Position {
 	  this.y = a; // sets the y value to the old x value using the placeholder
   }
   
+  public void init(Room[] rooms, int roomnum) {
+	  if (roomnum > 0) {
+		  this.x += rooms[roomnum-1].width+1;
+		  this.y += 0;//rooms[roomnum].height;
+	  }
+  }
+  
   /**
    * This method checks if two position objectss hold the same data, or in easier 
    * terms, if they are holding the same position.

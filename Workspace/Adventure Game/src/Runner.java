@@ -203,7 +203,7 @@ public class Runner {
 			opening(); // prints a message with all of the symbols of the dungeon and what they represent
 			stats(); // prints the character's new stats
 
-			do { //asks if the player is ready to start playing or not
+			do { // asks if the player is ready to start playing or not
 				print("Are you ready to proceed?");
 			} while (!reader.nextLine().equals("yes"));
 
@@ -216,8 +216,11 @@ public class Runner {
 			running = true;
 		}
 		frame2 = new Room(30, 30, "down", you);
-		Room[] rooms = {frame2, frame2};
-		frame = new Frame(rooms);
+		Room frame5 = new Room(30, 30, "down", you);
+		Room[] therooms = new Room[2];
+		therooms[0] = frame2;
+		therooms[1] = frame5;
+		frame = new Frame(therooms);
 	}
 
 	/**

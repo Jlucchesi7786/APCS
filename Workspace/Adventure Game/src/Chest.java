@@ -19,7 +19,6 @@ public class Chest {
 		this(new Position(x,y));
 	}
 	
-
 	Chest(Position pos) {
 		this.pos = pos;
 
