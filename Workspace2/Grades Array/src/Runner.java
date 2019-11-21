@@ -3,17 +3,20 @@ import java.util.*;
 public class Runner {
 	static double[] scores = new double[10];
 	static Scanner reader = new Scanner(System.in);
+	static int size = 0;
+	static boolean stop = false;
 
 	public static void main(String[] args) {
+		print("I have implemented Extension 1.");
 		for (int i = 0; i < 10; i++) {
 			print("Enter a score between 0 and 100:");
 			setScore(i);
-			if (scores[i] < 0) {
-				
+			if (stop) {
+				break;
 			}
 		}
 		print("Here are the scores:");
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < size; i++) {
 			print("" + scores[i]);
 		}
 
@@ -31,7 +34,7 @@ public class Runner {
 	 */
 	public static double min(double[] arr) {
 		double min = 500;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < size; i++) {
 			if (arr[i] < min) {
 				min = arr[i];
 			}
@@ -48,7 +51,7 @@ public class Runner {
 	 */
 	public static double max(double[] arr) {
 		double max = -2;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < size; i++) {
 			if (arr[i] > max) {
 				max = arr[i];
 			}
@@ -65,7 +68,7 @@ public class Runner {
 	 */
 	public static double mean(double[] arr) {
 		double mean = 0;
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < size; i++) {
 			mean += arr[i];
 		}
 
@@ -80,19 +83,20 @@ public class Runner {
 	 * @return the median value
 	 */
 	public static double median(double[] arr) {
-		for (int q = 0; q < arr.length; q++) {
-			for (int i = 0; i < arr.length-1; i++) {
+		double[] sort = arr;
+		for (int q = 0; q < size; q++) {
+			for (int i = 0; i < size-1; i++) {
 				double num;
 
-				if (arr[i+1] < arr[i]) {
-					num = arr[i];
-					arr[i] = arr[i+1];
-					arr[i+1] = num;
+				if (sort[i+1] < sort[i]) {
+					num = sort[i];
+					sort[i] = sort[i+1];
+					sort[i+1] = num;
 				}
 			}
 		}
 
-		return arr[arr.length/2];
+		return sort[size/2];
 	}
 
 	/**
@@ -102,8 +106,8 @@ public class Runner {
 	 */
 	public static void setScore(int level) {
 		setVal(scores, level);
-		while (scores[level] < 0.0 || scores[level] > 100.0) {
-			print("Please enter a number b etween 0 and 100.");
+		while (scores[level] > 100.0) {
+			print("Please enter a number below 100.");
 			setVal(scores, level);
 		}
 	}
@@ -118,7 +122,13 @@ public class Runner {
 		boolean set = false;
 		do {
 			try {
-				scores[level] = reader.nextDouble();
+				double store = reader.nextDouble();
+				if (store >= 0.0) {
+					scores[level] = store;
+					size++;
+				} else {
+					stop = true;
+				}
 				set = true;
 			} catch (Exception e) {
 				print("That is not a number. Please enter a number.");
