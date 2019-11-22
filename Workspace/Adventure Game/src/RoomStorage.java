@@ -2,11 +2,12 @@ import java.util.*;
 
 public class RoomStorage {
 	Room[] rooms;
-	int currentRoom;
-	final Room[] defaultRoom = {new Room()};
+	int index;
+	private static final Room[] defaultRoom = {new Room()};
 	
 	public RoomStorage() {
 		rooms = defaultRoom;
+		index = 0;
 	}
 	
 	public RoomStorage(Room[] rooms) {
@@ -16,18 +17,27 @@ public class RoomStorage {
 		}
 		this.rooms = new Room[roomlist.size()];
 		roomlist.toArray(this.rooms);
+		index = 0;
+	}
+	
+	public void moveUp() {
+		index++;
 	}
 
 	public int index() {
-		return currentRoom;
+		return index;
 	}
 	
 	public Room[] getRooms() {
 		return rooms;
 	}
 	
+	public Room getCurrent() {
+		return rooms[index];
+	}
+	
 	public Room getRoom(int index) {
-		this.currentRoom = index;
+		this.index = index;
 		return rooms[index];
 	}
 }

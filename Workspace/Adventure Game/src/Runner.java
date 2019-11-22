@@ -9,7 +9,6 @@ public class Runner {
 	static Room currentRoom;
 	static RoomStorage storage = new RoomStorage();
 	
-	//static Chest[] Chests = currentRoom.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
 	static String name = ""; // for whenever the Runner needs to reference the character's name
@@ -34,6 +33,7 @@ public class Runner {
 
 		do {
 			//frame.updatePlayer(you); // tells the frame where the player is
+			currentRoom = storage.getCurrent();
 			currentRoom.update(you);
 			you.getRoom(currentRoom);
 			//System.out.println(currentRoom); // prints the frame, letting the player know what's going on
@@ -155,6 +155,10 @@ public class Runner {
 		line();
 
 		for (long i = 0; i < ticks; i++) {} // waits for a small amount of time based on the ticks variable
+	}
+	
+	static void exitRoom() {
+		storage.moveUp();
 	}
 
 	/**
