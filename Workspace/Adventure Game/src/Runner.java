@@ -6,9 +6,10 @@ import java.util.Scanner;
  *
  */
 public class Runner {
-	static Room frame2;
-	static Frame frame; // Creates the room that the game works in
-	//static Chest[] Chests = frame2.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
+	static Room currentRoom;
+	static RoomStorage storage = new RoomStorage();
+	
+	//static Chest[] Chests = currentRoom.getChests(); // takes the Chests[] array from the frame and lets it be used in Runner
 	static Scanner reader = new Scanner(System.in);
 	static public Player you; // this is what the player controls, but it hasn't been finalized yet
 	static String name = ""; // for whenever the Runner needs to reference the character's name
@@ -32,11 +33,11 @@ public class Runner {
 		startup(); // runs the startup method created below
 
 		do {
-			frame.updatePlayer(you); // tells the frame where the player is
-			frame2.update(you);
-			you.getRoom(frame2);
-			//System.out.println(frame2); // prints the frame, letting the player know what's going on
-			System.out.println(frame);
+			//frame.updatePlayer(you); // tells the frame where the player is
+			currentRoom.update(you);
+			you.getRoom(currentRoom);
+			//System.out.println(currentRoom); // prints the frame, letting the player know what's going on
+			System.out.println(currentRoom);
 
 			if (PlayerTurn) {
 				takeAction(); // if it's the player's turn, they can enter in commands, then it lets the enemies have a go
@@ -82,7 +83,7 @@ public class Runner {
 				opening(); // prints the second help message, describing all of the symbols and what they represent
 			} else if (action.equals("show frame")) {
 				line();
-				System.out.println(frame2); // prints out the frame again
+				System.out.println(currentRoom); // prints out the frame again
 			} else if (action.equals("stats")) {
 				stats(); // prints out the character's current stats
 			} else if (action.equals("check inventory") || action.equals("inventory")) {
@@ -215,12 +216,7 @@ public class Runner {
 			you = new Player("goblin");
 			running = true;
 		}
-		frame2 = new Room(30, 30, "down", you);
-		Room frame5 = new Room(30, 30, "down", you);
-		Room[] therooms = new Room[2];
-		therooms[0] = frame2;
-		therooms[1] = frame5;
-		frame = new Frame(therooms);
+		currentRoom = storage.getRoom(0);
 	}
 
 	/**

@@ -203,12 +203,12 @@ public class Player {
 	private Tile[] getDirections() {
 		ArrayList<Tile> tileList = new ArrayList<Tile>(); // makes an ArrayList
 		tileList.add(room.map[pos.x][pos.y-1]); // up
-		//System.out.println("up: " + room.map[pos.x][pos.y-1].type);
 		tileList.add(room.map[pos.x+1][pos.y]); // right
-		//System.out.println("right: " + room.map[pos.x+1][pos.y].type);
 		tileList.add(room.map[pos.x][pos.y+1]); // down
-		//System.out.println("down: " + room.map[pos.x][pos.y+1].type);
 		tileList.add(room.map[pos.x-1][pos.y]); // left
+		//System.out.println("up: " + room.map[pos.x][pos.y-1].type);
+		//System.out.println("right: " + room.map[pos.x+1][pos.y].type);
+		//System.out.println("down: " + room.map[pos.x][pos.y+1].type);
 		//System.out.println("left: " + room.map[pos.x-1][pos.y].type);
 		Tile[] Directions = new Tile[tileList.size()];
 		tileList.toArray(Directions);
@@ -262,17 +262,17 @@ public class Player {
 			HP = 3;
 			str = 2;
 			def = 1;
-			spd = 2;
+			spd = 7;
 		} else if (race.equals("human")) {
 			HP = 4;
 			str = 3;
 			def = 3;
-			spd = 1;
+			spd = 5;
 		} else if (race.equals("orc")) {
 			HP = 6;
 			str = 5;
 			def = 1;
-			spd = 1;
+			spd = 5;
 		}
 	}
 

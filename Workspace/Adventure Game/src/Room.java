@@ -16,18 +16,22 @@ public class Room extends Compiler {
 	 * @param height What height the playable area should be at base (int).
 	 * @param orientation Still not sure what to do with this.
 	 */
-	Room(int width, int height, String orientation, Player player) {
+	public Room(int width, int height, String orientation, Player player) {
 		super(width+2, height+2, player);
 		this.width = width+2;
 		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
 	
-	Room(int width, int height) {
+	public Room(int width, int height) {
 		this(width, height, "down", new Player());
 	}
+	
+	public Room() {
+		this(30, 30);
+	}
 
-	Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
+	public Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
 		super(width+2, height+2, player, chests, walls, doors);
 		//this.width = width+2;
 		//this.height = height+2;
