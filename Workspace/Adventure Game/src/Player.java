@@ -164,31 +164,33 @@ public class Player {
 		}
 		
 		if (chestThere) {
+			boolean shouldOpen = false;
 			for (int i = 0; i < room.getChests().length; i++) {
 				if (direction == 0) {
 					if (room.getChests()[i].pos.equals(new Position(pos.x, pos.y-1))) {
-						room.getChests()[i].open();
-						get(room.getChests()[i].contents);
-						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
+						shouldOpen = true;
 					}
 				} else if (direction == 1) {
 					if (room.getChests()[i].pos.equals(new Position(pos.x+1, pos.y))) {
-						room.getChests()[i].open();
-						get(room.getChests()[i].contents);
-						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
+						shouldOpen = true;
 					}
 				} else if (direction == 2) {
 					if (room.getChests()[i].pos.equals(new Position(pos.x, pos.y+1))) {
-						room.getChests()[i].open();
-						get(room.getChests()[i].contents);
-						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
+						shouldOpen = true;
 					}
 				} else if (direction == 3) {
 					if (room.getChests()[i].pos.equals(new Position(pos.x-1, pos.y))) {
-						room.getChests()[i].open();
-						get(room.getChests()[i].contents);
-						System.out.println("you got a " + room.getChests()[i].contents.name + "!");
+						shouldOpen = true;
 					}
+				}
+				
+				if (shouldOpen) {
+					room.getChests()[i].open();
+					get(room.getChests()[i].contents);
+					System.out.println("you got a " + room.getChests()[i].contents.name + "!");		
+					shouldOpen = false;
+					System.out.println(room.getChests()[i].space.type);
+					room.compileTiles();
 				}
 			}
 		}

@@ -9,13 +9,15 @@ public class Frame extends FrameCompiler {
 	int width;
 	int height;
 
+	RoomStorage storerooms = new RoomStorage();
+	
 	//Player player = new Player();
 
 	String orientation;
 
 	Frame(Room[] rooms) {
+		//rooms = storerooms.getRooms();
 		super(rooms);
-		System.out.println(super.getWidth());
 		width = super.getWidth();
 		height = super.getHeight();
 	}
@@ -23,8 +25,8 @@ public class Frame extends FrameCompiler {
 	public String toString() {
 		String s = "";
 
-		for (int y = 0; y < 32; y++) {
-			for (int x = 0; x < width; x++) {
+		for (int y = 0; y < width; y++) {
+			for (int x = 0; x < height; x++) {
 				s += map[x][y].character + " ";
 
 				if (x == width-1) {

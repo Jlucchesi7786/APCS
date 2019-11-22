@@ -1,28 +1,31 @@
 import java.util.*;
 
-public class FrameCompiler extends Compiler {
+public class FrameCompiler {
 	private Chest[] chests;
 	private Wall[] walls;
 	private Door[] doors;
 	private Player player;
-	public Room[] allrooms;
+	public Room[] rooms;
+	
+	private RoomStorage storerooms = new RoomStorage();
 
 	private int width;
 	private int height;
 
 	public Tile[][] map;
+	public Tile[][][] maps;
 
 	public FrameCompiler(Room[] rooms) {
-		//System.out.println("hello??????");
-		this.allrooms = rooms;
+		rooms = storerooms.getRooms();
+		this.rooms = rooms;
 		ArrayList<Chest> ChestsList = new ArrayList<Chest>();
 		ArrayList<Wall> WallsList = new ArrayList<Wall>();
 		ArrayList<Door> DoorsList = new ArrayList<Door>();
-
-		width = 0;
-		height = 0;
-
+		ArrayList<Tile[][]> mapsList = new ArrayList<Tile[][]>();
+		
 		for (int i = 0; i < rooms.length; i++) {
+			mapsList.add(rooms[i].getMap());
+			
 			for (int q = 0; q <rooms[i].getChests().length; q++) {
 				ChestsList.add(rooms[i].getChests()[q]);
 				rooms[i].getChests()[q].pos.init(rooms, i);
@@ -37,10 +40,14 @@ public class FrameCompiler extends Compiler {
 				DoorsList.add(rooms[i].getDoors()[q]);
 				rooms[i].getDoors()[q].pos.init(rooms, i);
 			}
+			
 			width += rooms[i].width;
 			height += rooms[i].height;
-			//System.out.println(rooms[i].compress());
 		}
+		
+		maps = new Tile[mapsList.size()][][];
+		mapsList.toArray(maps);
+		
 		chests = new Chest[ChestsList.size()];
 		ChestsList.toArray(chests);
 
@@ -49,13 +56,28 @@ public class FrameCompiler extends Compiler {
 
 		doors = new Door[DoorsList.size()];
 		DoorsList.toArray(doors);
+		
 		player = new Player();
+
 		makeMap();
 	}
 
 	public void makeMap() {
 		ArrayList<Tile[]> mapList = new ArrayList<Tile[]>();
-		for (int q = 0; q < allrooms.length; q++) {
+		for (int q = 0; q < maps.length; q++) {
+			for (int x = 0; x < rooms[q].width; x++) {
+				ArrayList<Tile> rowList = new ArrayList<Tile>();
+				
+				for (int y = 0; y < rooms[q].height; y++) {
+					rowList.add(maps[q][x][y]);
+				}
+				
+				Tile[] rowArray = new Tile[rowList.size()];
+				rowList.toArray(rowArray);
+				mapList.add(rowArray);
+			}
+		}
+		/*for (int q = 0; q < allrooms.length; q++) {
 			int b = 0;
 			int c = 0;
 			if (q > 0) {
@@ -114,13 +136,15 @@ public class FrameCompiler extends Compiler {
 				rowList.toArray(rowArray);
 				mapList.add(rowArray);
 			}
-		}
+		}*/
 		map = new Tile[mapList.size()][];
 		mapList.toArray(map);
 	}
 
 	public void update(Player player) {
+		System.out.println("updating frame");
 		this.player = player;
+		makeMap();
 	}
 
 	public Chest[] getChests() {

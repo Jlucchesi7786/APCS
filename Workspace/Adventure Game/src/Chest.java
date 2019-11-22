@@ -18,7 +18,7 @@ public class Chest {
 	Chest(int x, int y) {
 		this(new Position(x,y));
 	}
-	
+
 	Chest(Position pos) {
 		this.pos = pos;
 
@@ -35,7 +35,7 @@ public class Chest {
 		open = true;
 		space.update("open chest");
 	}
-	
+
 	public String toString() {
 		String s = "Position: " + pos + "\nState: ";
 		if (open) {
@@ -43,7 +43,7 @@ public class Chest {
 		} else {
 			s += "closed";
 		}
-		
+
 		return s;
 	}
 }

@@ -22,6 +22,10 @@ public class Room extends Compiler {
 		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
+	
+	Room(int width, int height) {
+		this(width, height, "down", new Player());
+	}
 
 	Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
 		super(width+2, height+2, player, chests, walls, doors);
