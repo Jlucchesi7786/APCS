@@ -8,6 +8,14 @@ public class Room extends Compiler {
 
 	String orientation;
 
+	public Room() {
+		this(30, 30);
+	}
+	
+	public Room(int width, int height) {
+		this(width, height, "down", new Player());
+	}
+	
 	/**
 	 * This constructor makes a room with some given width and some given height. 
 	 * The playable area is a square/rectangle in the middle, with the walls 
@@ -22,19 +30,9 @@ public class Room extends Compiler {
 		this.height = height+2;
 		this.orientation = orientation; // orientation tells it where the entrance is
 	}
-	
-	public Room(int width, int height) {
-		this(width, height, "down", new Player());
-	}
-	
-	public Room() {
-		this(30, 30);
-	}
 
 	public Room(int width, int height, String orientation, Player player, Chest[] chests, Wall[] walls, Door[] doors) {
 		super(width+2, height+2, player, chests, walls, doors);
-		//this.width = width+2;
-		//this.height = height+2;
 		this.orientation = orientation;
 	}
 
