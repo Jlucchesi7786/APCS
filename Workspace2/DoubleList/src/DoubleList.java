@@ -96,7 +96,7 @@ public class DoubleList {
 			
 			return max;
 		} else {
-			throw new RuntimeException("Error: cannot take mean because list is empty.");
+			throw new RuntimeException("Error: cannot find max value because list is empty.");
 		}		
 	}
 	
@@ -114,7 +114,7 @@ public class DoubleList {
 			
 			return min;
 		} else {
-			throw new RuntimeException("Error: cannot take mean because list is empty.");
+			throw new RuntimeException("Error: cannot find minimum value because list is empty.");
 		}		
 	}
 
@@ -279,6 +279,8 @@ public class DoubleList {
 			for (int i = 0; i < size; i++) {
 				if (other.get(i) != this.get(i)) equals = false;
 			}
+		} else {
+			return false;
 		}
 		
 		return equals;
