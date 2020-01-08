@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 
 /**
  * This object holds a bunch of doubles and can do various things with those doubles.
@@ -284,6 +286,37 @@ public class DoubleList {
 		}
 		
 		return equals;
+	}
+	
+	public void sort() {
+		Arrays.sort(list, 0, size);
+	}
+	
+	public int binarySearch(double value) {
+		sort();
+		int index = size/2;
+		int large = size;
+		int difference = large-index;
+		int topbound = size;
+		int bottombound = 0;
+		double foundvalue = 0;
+		
+		do {
+			foundvalue = list[index];
+			System.out.println(index);
+			difference = large-index;
+			large = index;
+			if (value < foundvalue) {
+				large = 
+				index -= large/2;
+			} else if (value > foundvalue) {
+				index += large/2;
+			}
+		} while (value != foundvalue || difference == 0);
+		if (difference == 0) {
+			return -1;
+		}
+		return index;
 	}
 
 	/**
