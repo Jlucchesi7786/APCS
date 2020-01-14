@@ -293,29 +293,22 @@ public class DoubleList {
 	}
 	
 	public int binarySearch(double value) {
-		sort();
 		int index = size/2;
-		int large = size;
-		int difference = large-index;
+		double foundvalue = 0;
+		
 		int topbound = size;
 		int bottombound = 0;
-		double foundvalue = 0;
 		
 		do {
 			foundvalue = list[index];
-			System.out.println(index);
-			difference = large-index;
-			large = index;
 			if (value < foundvalue) {
-				large = 
-				index -= large/2;
+				topbound = index;
+				index -= (topbound-bottombound)/2;
 			} else if (value > foundvalue) {
-				index += large/2;
+				bottombound = index;
+				index += (topbound-bottombound)/2;
 			}
-		} while (value != foundvalue || difference == 0);
-		if (difference == 0) {
-			return -1;
-		}
+		} while (value != foundvalue);
 		return index;
 	}
 
