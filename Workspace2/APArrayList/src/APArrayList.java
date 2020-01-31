@@ -101,6 +101,12 @@ public class APArrayList<E extends Comparable<E>> extends ArrayList<E> {
 		}
 	}
 	
+	public E randVal() {
+		int factor = this.size()-1;
+		int i = (int) (Math.random()*factor);
+		return this.get(i);
+	}
+	
 	public String toString() {
 		if (this.size() <= 0) {
 			return "Empty";
