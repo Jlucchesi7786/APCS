@@ -3,7 +3,7 @@ import TurtleGraphics.*;
 public class Runner {
 
 	public static void main (String[] argv) {
-	 	Rect r1 = new Rect (0.0, 0.0, 10.0, 20.0); 	// create a new Rect
+	 	/*Rect r1 = new Rect (0.0, 0.0, 10.0, 20.0); 	// create a new Rect
 		Pen p1 = new StandardPen ();		// create a Pen to use draw multiple Rects
 	 	r1.draw (p1);					// draw initial rectangle to the Pen
 	 	r1.stretchBy (10.0);				// scale it to be 10x larger
@@ -14,7 +14,19 @@ public class Runner {
 		p1.move(-100, -100);				// move Pen to below the rectangles
 		p1.drawString(""+r1);				// invoke Rect's toString - display it
 		p1.move(-100, -115);				// move down
-		p1.drawString(""+r1.area());			// display the Rect's area
+		p1.drawString(""+r1.area());			// display the Rect's area*/
+		Circle c1 = new Circle (0.0, 0.0, 10.0); 
+		Pen p2 = new StandardPen ();		// Create a separate Pen window
+		c1.draw (p2);
+		c1.stretchBy (10.0);
+		c1.draw (p2);
+		c1.move (100.0, 100.0);
+		c1.draw (p2);
+		p2.up();
+		p2.move(-100, -100);
+		p2.drawString(""+c1);
+		p2.move(-100, -115);
+		p2.drawString(""+c1.area());
 	}
 
 }

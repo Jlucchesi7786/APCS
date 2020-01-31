@@ -41,9 +41,10 @@ public class Rect implements Shape {
 		}
 		p.up();
 		p.turn(90);
-		p.move(-w/2);
+		p.move(-(w/2 - x));
 		p.turn(90);
-		p.move(-h/2);
+		p.move(-(h/2 - y));
+		p.turn(180);
 		p.down();
 	}
 	
