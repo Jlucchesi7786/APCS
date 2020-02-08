@@ -1,9 +1,9 @@
 import TurtleGraphics.*;
 
 public class Circle implements Shape {
-	private double x;
-	private double y;
-	double radius;
+	protected double x;
+	protected double y;
+	protected double radius;
 	
 	public Circle() {
 		x = 0;

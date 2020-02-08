@@ -1,17 +1,17 @@
 import TurtleGraphics.*;
 
 public class Rect implements Shape {
-	private double x;
-	private double y;
+	protected double x;
+	protected double y;
 	
-	private double w;
+	protected double w;
 	private double h;
 	
 	public Rect() {
 		x = 0.0;
 		y = 0.0;
-		w = 1.0;
-		h = 1.0;
+		w = 5.0;
+		h = 5.0;
 	}
 	
 	public Rect(double x, double y, double h, double w) {

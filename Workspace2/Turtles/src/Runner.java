@@ -43,43 +43,56 @@ public class Runner {
 		p3.drawString(""+h1.area());
 		Pen p4 = new StandardPen();
 		Shape sh;
-		System.out.println("Enter a number to draw a shape. 1 for rectangle, 2 for circle"
-				+ ", and 3 for hexagon.");
-		int store = reader.nextInt();
-		if (store == 1) {
-			System.out.println("You have selected Rectangle. \n Please enter "
-					+ "an x position for the rectangle to be centered on (as a double).");
-			double xPos = reader.nextDouble();
-			System.out.println("Next, please enter a y position for the rectangle to be"
-					+ " centered on (also double).");
-			double yPos = reader.nextDouble();
-			System.out.println("Please enter the width of your rectangle (double):");
-			double width = reader.nextDouble();
-			System.out.println("Lastly, please enter the height of your rectangle "
-					+ "(double):");
-			double height = reader.nextDouble();
-			sh = new Rect(xPos, yPos, width, height);
-		} else if (store == 2) {
-			System.out.println("You have selected Circle. \n Please enter "
-					+ "an x position for the circle to be centered on (as a double).");
-			double xPos = reader.nextDouble();
-			System.out.println("Next, please enter a y position for the circle to be"
-					+ " centered on (also double).");
-			double yPos = reader.nextDouble();
-			System.out.println("Please enter the radius of your circle (double):");
-			double radius = reader.nextDouble();
-			sh = new Circle(xPos, yPos, radius);
-		} else if (store == 3) {
-			System.out.println("You have selected Hexagon. \n Please enter "
-					+ "an x position for the hexagon to be centered on (as a double).");
-			double xPos = reader.nextDouble();
-			System.out.println("Next, please enter a y position for the hexagon to be"
-					+ " centered on (also double).");
-			double yPos = reader.nextDouble();
-			System.out.println("Please enter the side length of your hexagon (double):");
-			double side = reader.nextDouble();
-			sh = new Hexagon(xPos, yPos, side);
-		}
+		boolean end = false;
+		do { 
+			System.out.println("Enter a number to draw a shape. 1 for rectangle, 2 for circle"
+					+ ", and 3 for hexagon.");
+			int store = reader.nextInt();
+			if (store == 1) {
+				System.out.println("You have selected Rectangle. \n Please enter "
+						+ "an x position for the rectangle to be centered on (as a double).");
+				double xPos = reader.nextDouble();
+				System.out.println("Next, please enter a y position for the rectangle to be"
+						+ " centered on (also double).");
+				double yPos = reader.nextDouble();
+				System.out.println("Please enter the width of your rectangle (double):");
+				double width = reader.nextDouble();
+				System.out.println("Lastly, please enter the height of your rectangle "
+						+ "(double):");
+				double height = reader.nextDouble();
+				sh = new Rect(xPos, yPos, width, height);
+			} else if (store == 2) {
+				System.out.println("You have selected Circle. \n Please enter "
+						+ "an x position for the circle to be centered on (as a double).");
+				double xPos = reader.nextDouble();
+				System.out.println("Next, please enter a y position for the circle to be"
+						+ " centered on (also double).");
+				double yPos = reader.nextDouble();
+				System.out.println("Please enter the radius of your circle (double):");
+				double radius = reader.nextDouble();
+				sh = new Circle(xPos, yPos, radius);
+			} else if (store == 3) {
+				System.out.println("You have selected Hexagon. \n Please enter "
+						+ "an x position for the hexagon to be centered on (as a double).");
+				double xPos = reader.nextDouble();
+				System.out.println("Next, please enter a y position for the hexagon to be"
+						+ " centered on (also double).");
+				double yPos = reader.nextDouble();
+				System.out.println("Please enter the side length of your hexagon (double):");
+				double side = reader.nextDouble();
+				sh = new Hexagon(xPos, yPos, side);
+			} else {
+				sh = new Rect(0, 0, 0, 0);
+			}
+			sh.draw(p4);
+			System.out.println("Would you like to draw another shape? Enter 'yes' to "
+					+ "continue.");
+			String ans = reader.next();
+			if (!ans.equals("yes")) {
+				end = true;
+			}
+		} while (!end);
+		System.out.println("End Program");
 	}
 
 }

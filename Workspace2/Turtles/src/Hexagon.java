@@ -1,10 +1,9 @@
 import TurtleGraphics.Pen;
 
-
 public class Hexagon implements Shape {
-	private double x;
-	private double y;
-	double side;
+	protected double x;
+	protected double y;
+	protected double side;
 	
 	public Hexagon() {
 		x = 0;
