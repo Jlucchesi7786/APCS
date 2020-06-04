@@ -1,14 +1,12 @@
 import TurtleGraphics.*;
 
-public class Circle implements Shape {
-	protected double x;
-	protected double y;
+public class Circle extends AbstractShape {
 	protected double radius;
 	
 	public Circle() {
-		x = 0;
-		y = 0;
-		radius = 5;
+		x = 0.0;
+		y = 0.0;
+		radius = 5.0;
 	}
 	
 	public Circle(double x, double y, double radius) {
@@ -38,21 +36,8 @@ public class Circle implements Shape {
 		p.down();
 	}
 	
-	public void move (double xPos, double yPos) {
-		x = xPos;
-		y = yPos;
-	}
-	
 	public void stretchBy (double factor) {
 		radius *= factor;
-	}
-	
-	public double getXPos () {
-		return x;
-	}
-	
-	public double getYPos () {
-		return y;
 	}
 	
 	public String toString () {

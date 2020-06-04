@@ -1,9 +1,6 @@
 import TurtleGraphics.*;
 
-public class Rect implements Shape {
-	protected double x;
-	protected double y;
-	
+public class Rect extends AbstractShape {	
 	protected double w;
 	private double h;
 	
@@ -48,23 +45,9 @@ public class Rect implements Shape {
 		p.down();
 	}
 	
-	public double getXPos() {
-		return x;
-	}
-	
-	public double getYPos() {
-		return y;
-	}
-	
-	public void move(double xPos, double yPos) {
-		this.x = xPos;
-		this.y = yPos;
-	}
-	
 	public void stretchBy(double factor) {
 		w *= factor;
 		h *= factor;
-		
 	}
 	
 	public String toString() {

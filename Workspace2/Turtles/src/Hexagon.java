@@ -1,13 +1,11 @@
 import TurtleGraphics.Pen;
 
-public class Hexagon implements Shape {
-	protected double x;
-	protected double y;
+public class Hexagon extends AbstractShape {
 	protected double side;
 	
 	public Hexagon() {
-		x = 0;
-		y = 0;
+		x = 0.0;
+		y = 0.0;
 		side = 5;
 	}
 	
@@ -40,22 +38,6 @@ public class Hexagon implements Shape {
 		p.turn(90);
 		p.move(-(y - (side)));
 		p.down();
-	}
-
-	@Override
-	public double getXPos() {
-		return x;
-	}
-
-	@Override
-	public double getYPos() {
-		return y;
-	}
-
-	@Override
-	public void move(double xPos, double yPos) {
-		x = xPos;
-		y = yPos;
 	}
 
 	@Override

@@ -2,6 +2,48 @@ import java.util.*;
 
 public class APArrayList<E extends Comparable<E>> extends ArrayList<E> {
 	
+	public int linSearch(E val) {
+		for (int i = 0; i < size(); i++) {
+			if (val.equals(get(i))) {
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+	
+	public int recSearch(E val) {
+		return recSearch(val, 0);
+	}
+	
+	private int recSearch(E val, int index) {
+		if (index >= size()) {
+			return -1;
+		}
+		if (val.equals(this.get(index))) {
+			return index;
+		}
+		
+		return recSearch(val, index + 1);
+	}
+	
+	public int recBinSearch(E val) {
+		return recBinSearch(val, 0, size()-1);
+	}
+	
+	private int recBinSearch(E val, int start, int end) {
+		int mid = start + ((end - start) / 2);
+		if (val.equals(get(mid))) {
+			return mid;
+		} else if (start == end) {
+			return -1;
+		}
+		if (val.compareTo(get(mid)) < 0) {
+			return recBinSearch(val, start, mid-1);
+		} else {
+			return recBinSearch(val, mid+1, end);
+		}
+	}
 	
 	public E midVal() {
 		int loc = this.size()/2;
@@ -24,23 +66,23 @@ public class APArrayList<E extends Comparable<E>> extends ArrayList<E> {
 	}
 	
 	public int binarySearch(E value) {
-		int index = this.size()/2;
-		E foundvalue = this.get(index);
+		int mid = this.size()/2;
+		E foundvalue = get(mid);
 		
 		int topbound = this.size();
 		int bottombound = 0;
 		
 		do {
-			foundvalue = this.get(index);
+			foundvalue = this.get(mid);
 			if (value.compareTo(foundvalue) < 0) {
-				topbound = index;
-				index -= (topbound-bottombound)/2;
+				topbound = mid;
 			} else if (value.compareTo(foundvalue) > 0) {
-				bottombound = index;
-				index += (topbound-bottombound)/2;
+				bottombound = mid;
 			}
+			
+			mid = bottombound + ((topbound - bottombound)/2);
 		} while (value != foundvalue);
-		return index;
+		return mid;
 	}
 	
 	public E min() {

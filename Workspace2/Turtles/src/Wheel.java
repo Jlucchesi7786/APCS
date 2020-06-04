@@ -9,7 +9,7 @@ public class Wheel extends Circle {
 	}
 	
 	public Wheel(double x, double y, double radius, int spokes) {
-		super();
+		super(x, y, radius);
 		this.spokes = spokes;
 	}
 	
